@@ -87,6 +87,9 @@
       namespacing = callLibs ./namespacing.nix;
 
       # Helpers for networking operations.
+      net = callLibs ./net.nix;
+
+      # Helpers for networking operations.
       networking = callLibs ./networking.nix;
 
       # Utilities for working with system secrets
@@ -100,8 +103,13 @@
       # as graphical-session.target
       systemd = callLibs ./systemd.nix;
 
+      types = callLibs ./types.nix;
+
       # Various assertions for verifying system features.
       validators = callLibs ./validators.nix;
+
+      # Herlpers for Wireguard configuration.
+      wireguard = callLibs ./wireguard.nix;
 
       # Utilities for working with styling options, i.e., themes
       themes = callLibs ./themes.nix;
@@ -132,7 +140,39 @@
     inherit (self.extendedLib.secrets) mkAgenixSecret;
     inherit (self.extendedLib.systemd) hardenService mkGraphicalService mkHyprlandService;
     inherit (self.extendedLib.themes) serializeTheme compileSCSS;
+    inherit (self.extendedLib.net) net;
     inherit (self.extendedLib.validators) ifTheyExist ifGroupsExist isAcceptedDevice isWayland ifOneEnabled;
+    #wireguard
+    #   inherit
+    # allExternalPeers
+    # allPeers
+    # assignedIpv4Addresses
+    # assignedIpv6Addresses
+    # explicitlyUsedAddresses
+    # externalPeerName
+    # externalPeerNamesRaw
+    # externalPeersForNode
+    # networkAddresses
+    # networkCidrs
+    # nodePeers
+    # participatingClientNodes
+    # participatingNodes
+    # participatingServerNodes
+    # peerPresharedKeyFile
+    # peerPresharedKeyPath
+    # peerPresharedKeySecret
+    # peerPrivateKeyFile
+    # peerPrivateKeyPath
+    # peerPrivateKeySecret
+    # peerPublicKeyFile
+    # peerPublicKeyPath
+    # sortedPeers
+    # spannedReservedNetwork
+    # toNetworkAddr
+    # usedAddresses
+    # wgCfgOf
+    # wgQuickConfigScript
+    # ;
   };
 
   # Merge layers of libraries into one as a subject of convenience
@@ -140,7 +180,7 @@
   extensions = lib.composeManyExtensions [
     (_: _: inputs.nixpkgs.lib)
     (_: _: inputs.flake-parts.lib)
-    (_: _: inputs.nvf.lib)
+    # (_: _: inputs.nvf.lib)
   ];
 
   # Extend default library

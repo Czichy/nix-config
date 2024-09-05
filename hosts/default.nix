@@ -15,8 +15,8 @@
     hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
     agenix = inputs.agenix.nixosModules.default; # secret encryption via age
     hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
-    topology = nix-topology.nixosModules.default;
-    disko = disko.nixosModules.disko;
+    topology = inputs.nix-topology.nixosModules.default;
+    disko = inputs.disko.nixosModules.disko;
 
     # Specify root path for the modules. The concept is similar to modulesPath
     # that is found in nixpkgs, and is defined in case the modulePath changes
