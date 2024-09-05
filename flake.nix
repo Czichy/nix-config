@@ -48,6 +48,17 @@
       inputs.systems.follows = "systems";
     };
 
+    # --- (NOTE, YOUR) EXTRA DEPENDENCIES --
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Repo for hardware-specific NixOS modules
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -166,17 +177,17 @@
       };
     };
 
-    # Nightly builds of Neovim, built from the latest
-    # revision. Usually breaks most plugins, but worth
-    # keeping for when it actually works.
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-small";
-        flake-parts.follows = "flake-parts";
-        git-hooks.follows = "git-hooks";
-      };
-    };
+    # # Nightly builds of Neovim, built from the latest
+    # # revision. Usually breaks most plugins, but worth
+    # # keeping for when it actually works.
+    # neovim-nightly = {
+    #   url = "github:nix-community/neovim-nightly-overlay";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs-small";
+    #     flake-parts.follows = "flake-parts";
+    #     git-hooks.follows = "git-hooks";
+    #   };
+    # };
 
     # Personal collection of packages and modules
     # that are too unstable or too personal for nyxexprs.
@@ -185,16 +196,16 @@
       inputs.systems.follows = "systems";
     };
 
-    # An extensible Neovim configuration wrapper.
-    nvf = {
-      url = "github:NotAShelf/nvf";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nil.follows = "nil";
-        flake-utils.follows = "flake-utils";
-        flake-parts.follows = "flake-parts";
-      };
-    };
+    # # An extensible Neovim configuration wrapper.
+    # nvf = {
+    #   url = "github:NotAShelf/nvf";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     nil.follows = "nil";
+    #     flake-utils.follows = "flake-utils";
+    #     flake-parts.follows = "flake-parts";
+    #   };
+    # };
 
     # Use my own wallpapers repository to provide various
     # wallpapers as nix packages. This has storage usage
@@ -269,6 +280,38 @@
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
+    };
+
+    helix = {
+      url = "github:helix-editor/helix/master";
+      inputs.nixpkgs.follows = "nixpkgs"; # ok?
+    };
+    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+
+    lib-net = {
+      url = "https://gist.github.com/duairc/5c9bb3c922e5d501a1edb9e7b3b845ba/archive/3885f7cd9ed0a746a9d675da6f265d41e9fd6704.tar.gz";
+      flake = false;
+    };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.4.1";
+
+    # my private secrets, it's a private repository, you need to replace it with your own.
+    # use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone to save time
+    private = {
+      # url = "git+ssh://git@github.com/czichy/nix-secrets.git?ref=restructure&shallow=1";
+      url = "git+ssh://git@github.com/czichy/nix-secrets.git?shallow=1";
+      flake = false;
+    };
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-inspect.url = "github:bluskript/nix-inspect";
+
+    nixos-nftables-firewall = {
+      url = "github:thelegy/nixos-nftables-firewall";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

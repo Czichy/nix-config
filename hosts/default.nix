@@ -15,6 +15,8 @@
     hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
     agenix = inputs.agenix.nixosModules.default; # secret encryption via age
     hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
+    topology = nix-topology.nixosModules.default;
+    disko = disko.nixosModules.disko;
 
     # Specify root path for the modules. The concept is similar to modulesPath
     # that is found in nixpkgs, and is defined in case the modulePath changes
@@ -82,168 +84,126 @@
   in {
     # My main desktop boasting a RX 6700XT and a Ryzen 5 3600x
     # fully free from nvidia
-    # fuck nvidia - Linus "the linux" Torvalds
-    enyo = mkNixosSystem {
+    "HL-1-OZ-PC-01" = mkNixosSystem {
       inherit withSystem;
-      hostname = "enyo";
+      hostname = "HL-1-OZ-PC-01";
       system = "x86_64-linux";
-      modules = mkModulesFor "enyo" {
+      modules = mkModulesFor "HL-1-OZ-PC-01" {
         roles = [graphical workstation];
         extraModules = [shared homes];
       };
     };
 
-    # HP Pavilion from 2016
-    # superseded by epimetheus
-    prometheus = mkNixosSystem {
-      inherit withSystem;
-      hostname = "prometheus";
-      system = "x86_64-linux";
-      modules = mkModulesFor "prometheus" {
-        roles = [graphical workstation laptop];
-        extraModules = [shared homes];
-      };
-    };
-
-    # Identical twin host for Prometheus
-    # provides full disk encryption
-    # with passkey/USB authentication
-    epimetheus = mkNixosSystem {
-      inherit withSystem;
-      hostname = "epimetheus";
-      system = "x86_64-linux";
-      modules = mkModulesFor "epimetheus" {
-        roles = [graphical workstation laptop];
-        extraModules = [shared homes];
-      };
-    };
-
-    # HP Pavilion laptop from 2023
-    # equipped a Ryzen 7 7730U
-    # usually acts as my portable workstation
-    # similar to epimetheus, has full disk
-    # encryption with ephemeral root using impermanence
-    hermes = mkNixosSystem {
-      inherit withSystem;
-      hostname = "hermes";
-      system = "x86_64-linux";
-      modules = mkModulesFor "hermes" {
-        roles = [graphical workstation laptop];
-        extraModules = [shared homes];
-      };
-    };
-
-    # Hetzner VPS to replace my previous server machines
     # hosts some of my infrastructure
-    helios = mkNixosSystem {
+    "HL-1-MRZ-SBC-01" = mkNixosSystem {
       inherit withSystem;
-      hostname = "helios";
+      hostname = "HL-1-MRZ-SBC-01";
       system = "x86_64-linux";
-      modules = mkModulesFor "helios" {
+      modules = mkModulesFor "HL-1-MRZ-SBC-01" {
         roles = [server headless];
         extraModules = [shared homes];
       };
     };
 
-    # Hetzner VPS to replace my previous server machines
-    # hosts some of my infrastructure
-    selene = mkNixosSystem {
-      inherit withSystem;
-      hostname = "helios";
-      system = "aarch64-linux";
-      modules = mkModulesFor "selene" {
-        roles = [server headless];
-        extraModules = [shared homes];
-      };
-    };
+    # # Hetzner VPS to replace my previous server machines
+    # # hosts some of my infrastructure
+    # selene = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "helios";
+    #   system = "aarch64-linux";
+    #   modules = mkModulesFor "selene" {
+    #     roles = [server headless];
+    #     extraModules = [shared homes];
+    #   };
+    # };
 
-    # Lenovo Ideapad from 2014
-    # Hybrid device
-    # acts as a portable server and a "workstation"
-    icarus = mkNixosSystem {
-      inherit withSystem;
-      hostname = "icarus";
-      system = "x86_64-linux";
-      modules = mkModulesFor "icarus" {
-        roles = [graphical workstation laptop server];
-        extraModules = [shared homes];
-      };
-    };
+    # # Lenovo Ideapad from 2014
+    # # Hybrid device
+    # # acts as a portable server and a "workstation"
+    # icarus = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "icarus";
+    #   system = "x86_64-linux";
+    #   modules = mkModulesFor "icarus" {
+    #     roles = [graphical workstation laptop server];
+    #     extraModules = [shared homes];
+    #   };
+    # };
 
-    # Raspberry Pi 400
-    # My Pi400 homelab
-    # used mostly for testing networking/cloud services
-    atlas = mkNixosSystem {
-      inherit withSystem;
-      hostname = "atlas";
-      system = "aarch64-linux";
-      modules = mkModulesFor "atlas" {
-        roles = [server headless];
-        extraModules = [shared hw.raspberry-pi-4];
-      };
-    };
+    # # Raspberry Pi 400
+    # # My Pi400 homelab
+    # # used mostly for testing networking/cloud services
+    # atlas = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "atlas";
+    #   system = "aarch64-linux";
+    #   modules = mkModulesFor "atlas" {
+    #     roles = [server headless];
+    #     extraModules = [shared hw.raspberry-pi-4];
+    #   };
+    # };
 
-    # Self-made live recovery environment that overrides or/and configures certain default programs
-    # provides tools and fixes the keymaps for my keyboard
-    gaea = mkNixosIso {
-      hostname = "gaea";
-      system = "x86_64-linux";
-      specialArgs = {inherit lib;};
-      modules = mkModulesFor "gaea" {
-        moduleTrees = [];
-        roles = [iso headless];
-        extraModules = [shared];
-      };
-    };
+    # # Self-made live recovery environment that overrides or/and configures certain default programs
+    # # provides tools and fixes the keymaps for my keyboard
+    # gaea = mkNixosIso {
+    #   hostname = "gaea";
+    #   system = "x86_64-linux";
+    #   specialArgs = {inherit lib;};
+    #   modules = mkModulesFor "gaea" {
+    #     moduleTrees = [];
+    #     roles = [iso headless];
+    #     extraModules = [shared];
+    #   };
+    # };
 
-    # An air-gapped NixOS live media to deal with
-    # sensitive tooling (e.g. Yubikey, GPG, etc.)
-    # isolated from all networking
-    erebus = mkNixosIso {
-      inherit withSystem;
-      hostname = "erebus";
-      system = "x86_64-linux";
-      modules = mkModulesFor "erebus" {
-        moduleTrees = [];
-        roles = [iso];
-        extraModules = [shared];
-      };
-    };
+    # # An air-gapped NixOS live media to deal with
+    # # sensitive tooling (e.g. Yubikey, GPG, etc.)
+    # # isolated from all networking
+    # erebus = mkNixosIso {
+    #   inherit withSystem;
+    #   hostname = "erebus";
+    #   system = "x86_64-linux";
+    #   modules = mkModulesFor "erebus" {
+    #     moduleTrees = [];
+    #     roles = [iso];
+    #     extraModules = [shared];
+    #   };
+    # };
 
-    # Pretty beefy VM running on my dedicated server
-    # is mostly for testing, but can run services at will
-    leto = mkNixosSystem {
-      inherit withSystem;
-      hostname = "leto";
-      system = "x86_64-linux";
-      modules = mkModulesFor "leto" {
-        roles = [server headless];
-        extraModules = [shared homes];
-      };
-    };
+    # # Pretty beefy VM running on my dedicated server
+    # # is mostly for testing, but can run services at will
+    # leto = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "leto";
+    #   system = "x86_64-linux";
+    #   modules = mkModulesFor "leto" {
+    #     roles = [server headless];
+    #     extraModules = [shared homes];
+    #   };
+    # };
 
-    # Twin virtual machine hosts
-    # Artemis is x86_64-linux
-    artemis = mkNixosSystem {
-      inherit withSystem;
-      hostname = "artemis";
-      system = "x86_64-linux";
-      modules = mkModulesFor "artemis" {
-        roles = [server headless];
-        extraModules = [shared];
-      };
-    };
+    # # Twin virtual machine hosts
+    # # Artemis is x86_64-linux
+    # artemis = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "artemis";
+    #   system = "x86_64-linux";
+    #   modules = mkModulesFor "artemis" {
+    #     roles = [server headless];
+    #     extraModules = [shared];
+    #   };
+    # };
 
-    # Apollon is also x86_64-linux
-    # but is for testing server-specific services
-    apollon = mkNixosSystem {
-      inherit withSystem;
-      hostname = "apollon";
-      system = "aarch64-linux";
-      modules = mkModulesFor "apollon" {
-        roles = [server headless];
-        extraModules = [shared];
-      };
-    };
+    # # Apollon is also x86_64-linux
+    # # but is for testing server-specific services
+    # apollon = mkNixosSystem {
+    #   inherit withSystem;
+    #   hostname = "apollon";
+    #   system = "aarch64-linux";
+    #   modules = mkModulesFor "apollon" {
+    #     roles = [server headless];
+    #     extraModules = [shared];
+    #   };
+    # };
   };
 }
