@@ -15,8 +15,8 @@
     hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
     agenix = inputs.agenix.nixosModules.default; # secret encryption via age
     hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
-    topology = inputs.nix-topology.nixosModules.default;
-    disko = inputs.disko.nixosModules.disko;
+    topology = inputs.nix-topology.nixosModules.default; # infrastructure and network diagrams directly from your NixOS configurations
+    disko = inputs.disko.nixosModules.disko; # declarative disk partitioning and formatting
 
     # Specify root path for the modules. The concept is similar to modulesPath
     # that is found in nixpkgs, and is defined in case the modulePath changes
@@ -55,6 +55,7 @@
     shared = [
       sharedModules # consume my flake's own nixosModules
       agenix # age encryption for secrets
+      topology # infrastructure and network diagrams directly from your NixOS configurations
     ];
 
     # mkModulesFor generates a list of modules to be imported by any host with
@@ -90,7 +91,7 @@
       system = "x86_64-linux";
       modules = mkModulesFor "HL-1-OZ-PC-01" {
         roles = [graphical workstation];
-        extraModules = [shared homes];
+        extraModules = [disko shared homes];
       };
     };
 
@@ -101,7 +102,7 @@
       system = "x86_64-linux";
       modules = mkModulesFor "HL-1-MRZ-SBC-01" {
         roles = [server headless];
-        extraModules = [shared homes];
+        extraModules = [disko shared homes];
       };
     };
 

@@ -1,4 +1,9 @@
 {
+  # https://github.com/NixOS/nixpkgs/issues/45492
+  # Set limits for esync.
+  systemd.extraConfig = "DefaultLimitNOFILE=1048576";
+  systemd.user.extraConfig = "DefaultLimitNOFILE=32000";
+
   security = {
     pam = {
       # fix "too many files open" errors while writing a lot of data at once
@@ -6,13 +11,21 @@
       # if this, somehow, doesn't meet your requirements you may just bump the numbers up
       loginLimits = [
         {
-          domain = "@wheel";
+          domain = "@czichy";
+          item = "stack";
+          type = "-";
+          value = "unlimited";
+        }
+        {
+          domain = "*";
+          # domain = "@wheel";
           item = "nofile";
           type = "soft";
           value = "524288";
         }
         {
-          domain = "@wheel";
+          domain = "*";
+          # domain = "@wheel";
           item = "nofile";
           type = "hard";
           value = "1048576";

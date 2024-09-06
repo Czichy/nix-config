@@ -2,8 +2,9 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkEnableOption mkOption literalExpression;
+}:
+with lib; let
+  inherit (lib) mkEnableOption mkOption literalExpression mkAgenixEnableOption;
 
   cfg = config.modules.system.impermanence;
 in {
@@ -16,6 +17,139 @@ in {
         based on the values of `modules.system.impermanence.root.enable`
         and `modules.system.impermanence.home.enable`.
       '';
+    };
+
+    agenix = {
+      enable = mkAgenixEnableOption;
+    };
+
+    disableSudoLectures = mkOption {
+      type = bool;
+      default = true;
+      description = ''
+        Whether to disable the default sudo lectures that would be
+        otherwise printed every time on login
+      '';
+    };
+
+    persistentRoot = mkOption {
+      type = path;
+      default = "/persist";
+      description = ''
+        Path on the already mounted filesystem for the persistent root, that is,
+        a root where we should store the persistent files and against which should
+        we link the temporary files against.
+
+        This is usually simply just /persist.
+      '';
+    };
+
+    allowOther = mkOption {
+      type = bool;
+      default = false;
+      description = ''
+        TODO
+      '';
+    };
+
+    btrfsWipe = {
+      enable = mkEnableOption ''
+        Enable btrfs based root filesystem wiping.
+
+        This has the following requirements
+        1. The user needs to have a btrfs formatted root partition (`rootPartition`)
+           with a root subvolume `rootSubvolume`. This means that the whole
+           system is going to reside on one partition.
+
+           Additional decoupling can be achieved then by btrfs subvolumes.
+        2. The user needs to create a blank snapshot of `rootSubvolume` during
+           installation specified by `blankRootSnapshot`.
+
+        The TL;DR of this approach is that we basically just restore the rootSubvolume
+        to its initial blank snaphost.
+
+        You can populate the root partition with any amount of desired btrfs
+        subvolumes. The `rootSubvolume` is the only one required.
+      '';
+
+      rootPartition = mkOption {
+        type = path;
+        default = "/dev/sda1";
+        description = ''
+          The dev path for the main btrfs formatted root partition that is
+          mentioned in the btrfsWipe.enable doc.
+        '';
+      };
+
+      rootSubvolume = mkOption {
+        type = str;
+        default = "root";
+        description = ''
+          The main root btrfs subvolume path that is going to be reset to
+          blankRootSnapshot later.
+        '';
+      };
+
+      oldRootSubvolume = mkOption {
+        type = str;
+        default = "old_roots";
+        description = ''
+          The main root btrfs subvolume path that is going to be reset to
+          blankRootSnapshot later.
+        '';
+      };
+
+      blankRootSnapshot = mkOption {
+        type = str;
+        default = "root-blank";
+        description = ''
+          The btrfs snapshot of the main rootSubvolume. You will probably
+          need to create this one manually during the installation & formatting
+          of the system. One such way is using the following command:
+
+          btrfs su snapshot -r /mnt/root /mnt/root-blank
+        '';
+      };
+
+      homeSubvolume = mkOption {
+        type = str;
+        default = "home";
+        description = ''
+          The main root btrfs subvolume path that is going to be reset to
+          blankRootSnapshot later.
+        '';
+      };
+
+      oldHomeSubvolume = mkOption {
+        type = str;
+        default = "old_homes";
+        description = ''
+          The main root btrfs subvolume path that is going to be reset to
+          blankRootSnapshot later.
+        '';
+      };
+
+      blankHomeSnapshot = mkOption {
+        type = str;
+        default = "home-blank";
+        description = ''
+          The btrfs snapshot of the main rootSubvolume. You will probably
+          need to create this one manually during the installation & formatting
+          of the system. One such way is using the following command:
+
+          btrfs su snapshot -r /mnt/root /mnt/root-blank
+        '';
+      };
+      mountpoint = mkOption {
+        type = path;
+        default = "/btrfs_tmp";
+        description = ''
+          Temporary mountpoint that should be used for mounting and resetting
+          the rootPartition.
+
+          This is useful mainly if you want to prevent some conflicts.
+        '';
+      };
     };
 
     root = {

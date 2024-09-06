@@ -2,7 +2,12 @@
   config.modules.system = {
     mainUser = "czichy";
     fs.enabledFilesystems = ["btrfs" "vfat" "ntfs" "exfat"];
-    autoLogin = true;
+    impermanence = {
+      enable = true;
+      root.enable = true;
+      home.enable = true;
+    };
+    # autoLogin = true;
 
     boot = {
       loader = "systemd-boot";
@@ -17,15 +22,15 @@
       };
     };
 
-    containers = {
-      enabledContainers = ["alpha"];
-    };
+    # containers = {
+    # enabledContainers = ["alpha"];
+    # };
 
-    yubikeySupport.enable = true;
+    # yubikeySupport.enable = true;
 
     video.enable = true;
     sound.enable = true;
-    bluetooth.enable = false;
+    # bluetooth.enable = false;
     printing.enable = false;
     emulation.enable = true;
 
@@ -44,10 +49,11 @@
         isServer = false;
       };
     };
+    agenix.enable = true;
 
     security = {
       tor.enable = true;
-      fixWebcam = false;
+      # fixWebcam = false;
       lockModules = true;
       auditd.enable = true;
     };

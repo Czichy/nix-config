@@ -4,10 +4,12 @@
   ...
 }: let
   inherit (lib) mkAgenixSecret;
+  inherit (lib) isModuleLoadedAndEnabled mkAgenixEnableOption;
   inherit (lib.strings) optionalString;
 
   sys = config.modules.system;
   cfg = sys.services;
+  agenixCheck = (isModuleLoadedAndEnabled config "modules.system.agenix") && sys.agenix.enable;
 in {
   age.identityPaths = [
     "${optionalString sys.impermanence.root.enable "/persist"}/etc/ssh/ssh_host_ed25519_key"
@@ -16,7 +18,8 @@ in {
 
   age.secrets = {
     # TODO: system option for declaring host as a potential builder
-    nix-builderKey = mkAgenixSecret true {
+    # nix-builderKey = mkAgenixSecret true {
+    nix-builderKey = mkAgenixSecret agenixCheck {
       file = "common/nix-builder.age";
     };
 

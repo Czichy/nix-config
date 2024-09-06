@@ -1,13 +1,35 @@
-{
-  lib,
-  inputs,
-  ...
-}: let
-  inherit (builtins) filter map toString elem;
+{lib, ...}: let
+  inherit (builtins) filter map toString elem hasAttr head tail length;
   inherit (lib.filesystem) listFilesRecursive;
-  inherit (lib.strings) hasSuffix;
+  inherit (lib.strings) hasSuffix splitString;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) str int;
+
+  # Recursively checks the presence of a nixos/home-manager module and whether
+  # its enabled.
+
+  # One might ask why not `?` or `hasAttr` instead?
+  # 1. The `?` operator is indeed able to handle nested attributes, however, I've
+  #    had some errors while linting and running the `check` command during
+  #    development, which seems to be due to the inline direct syntax with a
+  #    potentially nonexisting attributes.
+  # 2. The `hasAttr` takes a string identifier instead, which is more safe, however,
+  #     it doesn't support nested attributes.
+
+  # The solution is then to construct a recursive traverse over the identifier
+  # using the `hasAttr` function.
+
+  # *Type*: `isModuleLoadedAndEnabled :: AttrSet -> String -> Bool`
+  isModuleLoadedAndEnabled = cfg: identifier: let
+    aux = acc: parts: let
+      elem = head parts;
+      rest = tail parts;
+    in
+      if length rest == 0
+      then (hasAttr elem acc) && (hasAttr "enable" acc.${elem}) && acc.${elem}.enable
+      else (hasAttr elem acc) && (aux acc.${elem} rest);
+  in
+    aux cfg (splitString "." identifier);
 
   # `mkModuleTree` is used to recursively import all Nix file in a given directory, assuming the
   # given directory to be the module root, where rest of the modules are to be imported. This
@@ -74,5 +96,5 @@
       // extraOptions;
   };
 in {
-  inherit mkService mkModuleTree mkModuleTree';
+  inherit mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled;
 }

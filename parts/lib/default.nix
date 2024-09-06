@@ -92,6 +92,9 @@
       # Helpers for networking operations.
       networking = callLibs ./networking.nix;
 
+      # Helpers for systemwide options.
+      options = callLibs ./options.nix;
+
       # Utilities for working with system secrets
       secrets = callLibs ./secrets.nix;
 
@@ -133,14 +136,23 @@
     inherit (self.extendedLib.fs) mkBtrfs;
     inherit (self.extendedLib.hardware) isx86Linux primaryMonitor;
     inherit (self.extendedLib.misc) filterNixFiles importNixFiles boolToNum fetchKeys containsStrings indexOf intListToStringList;
-    inherit (self.extendedLib.modules) mkService mkModuleTree mkModuleTree';
+    inherit (self.extendedLib.modules) mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled;
     inherit (self.extendedLib.namespacing) makeSocketNsPhysical makeServiceNsPhysical unRestrictNamespaces;
+    inherit (self.extendedLib.net) net;
     inherit (self.extendedLib.networking) isValidIPv4;
+    inherit
+      (self.extendedLib.options)
+      mkAlreadyEnabledOption
+      mkImpermanenceEnableOption
+      mkPywalEnableOption
+      mkAgenixEnableOption
+      mkUsersSettingsOption
+      ;
+
     inherit (self.extendedLib.ssh) mkPubkeyFor;
     inherit (self.extendedLib.secrets) mkAgenixSecret;
     inherit (self.extendedLib.systemd) hardenService mkGraphicalService mkHyprlandService;
     inherit (self.extendedLib.themes) serializeTheme compileSCSS;
-    inherit (self.extendedLib.net) net;
     inherit (self.extendedLib.validators) ifTheyExist ifGroupsExist isAcceptedDevice isWayland ifOneEnabled;
     #wireguard
     #   inherit

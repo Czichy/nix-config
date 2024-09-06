@@ -1,4 +1,12 @@
 {
+  config,
+  globals,
+  ...
+}:
+#let
+#macAddress_enp39s0 = "2c:f0:5d:9f:10:37";
+# in
+{
   #  we don't want the kernel setting up interfaces magically for us
   boot.extraModprobeConfig = "options bonding max_bonds=0";
   networking = {

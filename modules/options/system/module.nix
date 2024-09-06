@@ -38,6 +38,9 @@ in {
 
     # deterministic user/group ids
     ./deterministic_ids.nix
+
+    # agenix secrets
+    ./agenix.nix
   ];
   config = {
     warnings = mkMerge [
