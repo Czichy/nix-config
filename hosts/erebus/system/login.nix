@@ -31,7 +31,7 @@ in {
       vt = 2;
       settings = {
         default_session = {
-          user = "notashelf";
+          user = "czichy";
           command = concatStringsSep " " [
             (getExe pkgs.greetd.tuigreet)
             "--time"
@@ -43,7 +43,7 @@ in {
         };
 
         initial_session = {
-          user = "notashelf";
+          user = "czichy";
           command = "sway";
         };
       };

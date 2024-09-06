@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  users.users."notashelf" = {
+  users.users."czichy" = {
     isNormalUser = true;
     extraGroups = ["wheel"];
     shell = pkgs.zsh;

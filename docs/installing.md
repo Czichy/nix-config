@@ -176,9 +176,9 @@ new every day :)
 That concludes my list of "starter" tips and tricks. If you happen to have
 stumbled upon this page, but remain curious _please_ do contact me. I am willing
 to answer your questions as long as I am free over e-mail via
-`raf [at] notashelf [dot] dev` or over Discord, by the handle `@notashelf`. You
-may also reach out to me over Mastodon, via `@raf@social.notashelf.dev` or on
-Matrix, by shooting me a DM at `https://matrix.to/#/@raf:notashelf.dev`
+`raf [at] czichy [dot] dev` or over Discord, by the handle `@czichy`. You
+may also reach out to me over Mastodon, via `@raf@social.czichy.dev` or on
+Matrix, by shooting me a DM at `https://matrix.to/#/@raf:czichy.dev`
 
 I also welcome your feedback over those channels, should you wish to provide
 any.

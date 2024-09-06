@@ -26,7 +26,7 @@ in {
 
       # my credentials
       userName = "NotAShelf";
-      userEmail = "raf@notashelf.dev";
+      userEmail = "raf@czichy.dev";
 
       # lets sign using our own key
       # this must be provided by the host

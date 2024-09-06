@@ -23,6 +23,6 @@ in
     meta = {
       description = "My personal startpage";
       license = lib.licenses.gpl3Only;
-      maintainers = [lib.maintainers.NotAShelf];
+      maintainers = [lib.maintainers.Czichy];
     };
   }

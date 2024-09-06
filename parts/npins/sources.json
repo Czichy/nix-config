@@ -37,7 +37,7 @@
       "type": "GitRelease",
       "repository": {
         "type": "GitHub",
-        "owner": "notashelf",
+        "owner": "czichy",
         "repo": "slides.nvim"
       },
       "pre_releases": false,
@@ -45,7 +45,7 @@
       "release_prefix": null,
       "version": "v0.1.0",
       "revision": "768fde54ac9de657887b605ee93f11993b26c9c2",
-      "url": "https://api.github.com/repos/notashelf/slides.nvim/tarball/v0.1.0",
+      "url": "https://api.github.com/repos/czichy/slides.nvim/tarball/v0.1.0",
       "hash": "19pzmwpjdsmyy9ygk6ln1i18qihdffp6dgx4vvccyvvz3shabvhx"
     },
     "smart-splits.nvim": {

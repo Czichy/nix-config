@@ -53,7 +53,7 @@ in {
           ATTACHMENTS_FOLDER = "${dataDir}/attachments";
           ICON_CACHE_FOLDER = "${dataDir}/icon_cache";
 
-          DOMAIN = "https://vault.notashelf.dev";
+          DOMAIN = "https://vault.czichy.com";
 
           # Rocket server configuration
           ROCKET_ADDRESS = host;
@@ -75,7 +75,7 @@ in {
 
           SIGNUPS_ALLOWED = false;
           SIGNUPS_VERIFY = true;
-          SIGNUPS_DOMAINS_WHITELIST = "notashelf.dev";
+          SIGNUPS_DOMAINS_WHITELIST = "czichy.com";
 
           # Push notifications
           PUSH_ENABLED = true;
@@ -84,15 +84,15 @@ in {
 
           # SMTP Settings
           smtpAuthMechanism = "Login";
-          smtpFrom = "vaultwarden@notashelf.dev";
-          smtpFromName = "NotAShelf's Vaultwarden Service";
-          smtpHost = "mail.notashelf.dev";
+          smtpFrom = "vaultwarden@czichy.com";
+          smtpFromName = "czichy's Vaultwarden Service";
+          smtpHost = "mail.czichy.com";
           smtpPort = 465;
           smtpSecurity = "force_tls";
         };
       };
 
-      nginx.virtualHosts."vault.notashelf.dev" =
+      nginx.virtualHosts."vault.czichy.dev" =
         {
           locations."/" = {
             proxyPass = "http://${host}:${toString port}";

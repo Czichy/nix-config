@@ -17,8 +17,8 @@ in {
       "Element/config.json".text = builtins.toJSON {
         default_server_config = {
           "m.homeserver" = {
-            base_url = "https://notashelf.dev";
-            server_name = "notashelf.dev";
+            base_url = "https://czichy.dev";
+            server_name = "czichy.dev";
           };
 
           "m.identity_server" = {base_url = "";};

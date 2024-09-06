@@ -51,7 +51,7 @@ in {
             type = "s3";
             region = "helios";
             bucket = "attic-cache";
-            endpoint = "https://s3.notashelf.dev";
+            endpoint = "https://s3.czichy.dev";
           };
           */
 

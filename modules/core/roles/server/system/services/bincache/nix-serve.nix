@@ -26,7 +26,7 @@ in {
     };
 
     services.nginx = {
-      virtualHosts."cache.notashelf.dev" =
+      virtualHosts."cache.czichy.dev" =
         {
           locations."/".extraConfig = ''
             proxy_pass http://127.0.0.1:5000;

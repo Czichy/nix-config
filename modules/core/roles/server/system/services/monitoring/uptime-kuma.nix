@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  domain = "up.notashelf.dev";
+  domain = "up.czichy.dev";
 in {
   users = {
     users.uptime-kuma = {

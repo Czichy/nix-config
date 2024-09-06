@@ -7,7 +7,7 @@
   inherit (lib.modules) mkIf mkForce;
 
   cfg = config.modules.system.services;
-  domain = "git.notashelf.dev";
+  domain = "git.czichy.dev";
 
   dataDir = "/srv/storage/forgejo";
   dumpDir = "/srv/storage/forgejo-dump";
@@ -167,10 +167,10 @@ in {
           mailer = mkIf config.modules.system.services.mailserver.enable {
             ENABLED = true;
             PROTOCOL = "smtps";
-            SMTP_ADDR = "mail.notashelf.dev";
+            SMTP_ADDR = "mail.czichy.dev";
             SMTP_PORT = 465;
-            FROM = "Forgejo <forgejo@notashelf.dev>";
-            USER = "forgejo@notashelf.dev";
+            FROM = "Forgejo <forgejo@czichy.dev>";
+            USER = "forgejo@czichy.dev";
             SEND_AS_PLAIN_TEXT = true;
             SENDMAIL_PATH = "${pkgs.system-sendmail}/bin/sendmail";
           };

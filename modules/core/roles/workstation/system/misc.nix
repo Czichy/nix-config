@@ -2,7 +2,7 @@
   inherit (lib.modules) mkForce;
 in {
   # Firefox cache on tmpfs
-  fileSystems."/home/notashelf/.cache/mozilla/firefox" = {
+  fileSystems."/home/czichy/.cache/mozilla/firefox" = {
     device = "tmpfs";
     fsType = "tmpfs";
     noCheck = true;

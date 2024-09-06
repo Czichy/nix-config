@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   config.modules.system = {
-    mainUser = "notashelf";
+    mainUser = "czichy";
     fs.enabledFilesystems = ["btrfs" "vfat" "ntfs" "exfat"];
     autoLogin = true;
 

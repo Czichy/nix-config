@@ -35,6 +35,9 @@ in {
 
     # systemd-nspawn containers
     ./containers.nix
+
+    # deterministic user/group ids
+    ./deterministic_ids.nix
   ];
   config = {
     warnings = mkMerge [
@@ -61,7 +64,7 @@ in {
 
     users = mkOption {
       type = listOf str;
-      default = ["notashelf"];
+      default = ["czichy"];
       description = "A list of home-manager users on the system.";
     };
 

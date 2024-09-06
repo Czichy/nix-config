@@ -45,9 +45,9 @@ in {
       };
 
       nginx.virtualHosts = {
-        "notashelf.dev" =
+        "czichy.dev" =
           {
-            serverAliases = ["matrix.notashelf.dev"];
+            serverAliases = ["matrix.czichy.dev"];
             locations = {
               "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
               "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
@@ -66,8 +66,8 @@ in {
 
         extraConfigFiles = [config.age.secrets.matrix-secret.path];
         settings = {
-          server_name = "notashelf.dev";
-          public_baseurl = "https://notashelf.dev";
+          server_name = "czichy.dev";
+          public_baseurl = "https://czichy.dev";
 
           federation_client_minimum_tls_version = "1.2";
           suppress_key_server_warning = true;

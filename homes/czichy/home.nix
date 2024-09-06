@@ -16,8 +16,8 @@
 
   config = {
     home = {
-      username = "notashelf";
-      homeDirectory = "/home/notashelf";
+      username = "czichy";
+      homeDirectory = "/home/czichy";
       extraOutputsToInstall = ["doc" "devdoc"];
 
       # This is, and should remain, the version on which you have initiated

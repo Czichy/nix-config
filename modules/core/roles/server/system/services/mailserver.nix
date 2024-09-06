@@ -21,9 +21,9 @@ in {
 
     mailserver = {
       enable = true;
-      fqdn = "mail.notashelf.dev";
+      fqdn = "mail.czichy.dev";
       certificateScheme = "acme-nginx";
-      domains = ["notashelf.dev"];
+      domains = ["czichy.dev"];
 
       mailDirectory = "/srv/storage/mail/vmail";
       dkimKeyDirectory = "/srv/storage/mail/dkim";
@@ -42,48 +42,48 @@ in {
       lmtpSaveToDetailMailbox = "yes";
       maxConnectionsPerUser = 25;
       loginAccounts = {
-        "raf@notashelf.dev" = {
+        "raf@czichy.dev" = {
           hashedPasswordFile = secrets.mailserver-secret.path;
           aliases = [
-            "me@notashelf.dev"
-            "admin@notashelf.dev"
-            "root@notashelf.dev"
-            "postmaster@notashelf.dev"
+            "me@czichy.dev"
+            "admin@czichy.dev"
+            "root@czichy.dev"
+            "postmaster@czichy.dev"
           ];
         };
 
-        "noreply@notashelf.dev" = {
+        "noreply@czichy.dev" = {
           hashedPasswordFile = secrets.mailserver-noreply-secret.path;
           sendOnly = true;
           sendOnlyRejectMessage = "";
           quota = "1G";
         };
 
-        "forgejo@notashelf.dev" = mkIf cfg.forgejo.enable {
-          aliases = ["git@notashelf.dev"];
+        "forgejo@czichy.dev" = mkIf cfg.forgejo.enable {
+          aliases = ["git@czichy.dev"];
           hashedPasswordFile = secrets.mailserver-forgejo-secret.path;
           sendOnly = true;
           sendOnlyRejectMessage = "";
           quota = "1G";
         };
 
-        "vaultwarden@notashelf.dev" = mkIf cfg.vaultwarden.enable {
-          aliases = ["vault@notashelf.dev"];
+        "vaultwarden@czichy.dev" = mkIf cfg.vaultwarden.enable {
+          aliases = ["vault@czichy.dev"];
           hashedPasswordFile = secrets.mailserver-vaultwarden-secret.path;
           sendOnly = true;
           sendOnlyRejectMessage = "";
           quota = "1G";
         };
 
-        "matrix@notashelf.dev" = mkIf cfg.social.matrix.enable {
+        "matrix@czichy.dev" = mkIf cfg.social.matrix.enable {
           hashedPasswordFile = secrets.mailserver-matrix-secret.path;
           sendOnly = true;
           sendOnlyRejectMessage = "";
           quota = "1G";
         };
 
-        "cloud@notashelf.dev" = mkIf cfg.nextcloud.enable {
-          aliases = ["nextcloud@notashelf.dev"];
+        "cloud@czichy.dev" = mkIf cfg.nextcloud.enable {
+          aliases = ["nextcloud@czichy.dev"];
           hashedPasswordFile = secrets.mailserver-cloud-secret.path;
           sendOnly = true;
           sendOnlyRejectMessage = "";
@@ -141,14 +141,14 @@ in {
         dicts = with pkgs.aspellDicts; [en tr de];
         # this is the url of the vhost, not necessarily the same as the fqdn of
         # the mailserver
-        hostName = "webmail.notashelf.dev";
+        hostName = "webmail.czichy.dev";
         extraConfig = ''
           $config['imap_host'] = array(
-            'tls://mail.notashelf.dev' => "NotAShelf's Mail Server",
+            'tls://mail.czichy.dev' => "NotAShelf's Mail Server",
             'ssl://imap.gmail.com:993' => 'Google Mail',
           );
           $config['username_domain'] = array(
-            'mail.notashelf.dev' => 'notashelf.dev',
+            'mail.czichy.dev' => 'czichy.dev',
             'mail.gmail.com' => 'gmail.com',
           );
           $config['x_frame_options'] = false;
@@ -169,8 +169,8 @@ in {
           "blacklist.woody.ch"
         ];
         dnsBlacklistOverrides = ''
-          notashelf.dev OK
-          mail.notashelf.dev OK
+          czichy.dev OK
+          mail.czichy.dev OK
           127.0.0.0/8 OK
           192.168.0.0/16 OK
         '';
@@ -192,8 +192,8 @@ in {
       };
 
       nginx.virtualHosts = {
-        "mail.notashelf.dev" = {quic = true;} // lib.sslTemplate;
-        "webmail.notashelf.dev" = {quic = true;} // lib.sslTemplate;
+        "mail.czichy.dev" = {quic = true;} // lib.sslTemplate;
+        "webmail.czichy.dev" = {quic = true;} // lib.sslTemplate;
       };
     };
   };

@@ -33,7 +33,7 @@ in {
     };
 
     services.nginx.virtualHosts = {
-      "repo.notashelf.dev" =
+      "repo.czichy.dev" =
         {
           locations."/".proxyPass = "http://127.0.0.1:${toString port}";
           extraConfig = ''

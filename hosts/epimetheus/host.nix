@@ -57,7 +57,7 @@ in {
       ];
     };
 
-    home-manager.users.notashelf.systemd.user.startServices = mkForce "legacy";
+    home-manager.users.czichy.systemd.user.startServices = mkForce "legacy";
 
     console.earlySetup = true;
   };

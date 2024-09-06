@@ -52,7 +52,7 @@ in
       homepage = "https://github.com/dylanaraps/neofetch";
       license = lib.licenses.mit;
       platforms = lib.platforms.all;
-      maintainers = with lib.maintainers; [NotAShelf];
+      maintainers = with lib.maintainers; [Czichy];
       mainProgram = "neofetch";
     };
   }

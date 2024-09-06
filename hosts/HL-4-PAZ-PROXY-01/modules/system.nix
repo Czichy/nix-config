@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   config.modules.system = {
-    mainUser = "notashelf";
+    mainUser = "czichy";
     fs.enabledFilesystems = ["vfat" "exfat" "ext4"];
     video.enable = false;
     sound.enable = false;

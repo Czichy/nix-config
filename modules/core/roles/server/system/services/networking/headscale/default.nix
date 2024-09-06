@@ -33,7 +33,7 @@ in {
           grpc_listen_addr = "127.0.0.1:50443";
           grpc_allow_insecure = false;
 
-          server_url = "https://hs.notashelf.dev";
+          server_url = "https://hs.czichy.dev";
           tls_cert_path = null;
           tls_key_path = null;
 
@@ -66,7 +66,7 @@ in {
         };
       };
 
-      nginx.virtualHosts."hs.notashelf.dev" = {
+      nginx.virtualHosts."hs.czichy.dev" = {
         forceSSL = true;
         enableACME = true;
         quic = true;
@@ -127,9 +127,9 @@ in {
 
         path = [pkgs.headscale];
         script = ''
-          if ! headscale users list | grep notashelf; then
-            headscale users create notashelf
-            headscale --user notashelf preauthkeys create --reusable --expiration 100y > /var/lib/headscale/preauth.key
+          if ! headscale users list | grep czichy; then
+            headscale users create czichy
+            headscale --user czichy preauthkeys create --reusable --expiration 100y > /var/lib/headscale/preauth.key
           fi
         '';
       };

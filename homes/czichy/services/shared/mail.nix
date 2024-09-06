@@ -10,14 +10,14 @@
     accounts.email = {
       maildirBasePath = config.xdg.userDirs.extraConfig.XDG_MAIL_DIR;
       accounts = {
-        notashelf = let
+        czichy = let
           gpgKey = "0xBA46BCC36E912922";
           name = "NotAShelf";
         in {
           primary = true;
-          address = "raf@notashelf.dev";
-          aliases = ["me@notashelf.dev"];
-          userName = "raf@notashelf.dev";
+          address = "raf@czichy.dev";
+          aliases = ["me@czichy.dev"];
+          userName = "raf@czichy.dev";
           realName = name; # very real, I know
           passwordCommand = ''
             # this is a really bad way of getting the password
@@ -32,7 +32,7 @@
               ${name}
 
               Want to use GPG encryption with me? Try my GPG key:
-              [${gpgKey}](https://github.com/notashelf.gpg)
+              [${gpgKey}](https://github.com/czichy.gpg)
             '';
           };
 
@@ -44,12 +44,12 @@
           };
 
           imap = {
-            host = "notashelf.dev";
+            host = "czichy.dev";
             tls.enable = true;
           };
 
           smtp = {
-            host = "notashelf.dev";
+            host = "czichy.dev";
             tls.enable = true;
           };
 

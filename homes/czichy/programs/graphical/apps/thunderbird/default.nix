@@ -16,7 +16,7 @@ in {
 
     programs.thunderbird = {
       enable = true;
-      profiles."notashelf" = {
+      profiles."czichy" = {
         isDefault = true;
         userChrome = "";
         userContent = "";

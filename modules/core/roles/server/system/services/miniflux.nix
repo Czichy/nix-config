@@ -54,7 +54,7 @@ in {
         };
 
         environment = {
-          BASE_URL = "https://flux.notashelf.dev";
+          BASE_URL = "https://flux.czichy.dev";
           LISTEN_ADDR = "/run/miniflux/miniflux.sock";
           DATABASE_URL = "user=miniflux host=/run/postgresql dbname=miniflux";
           RUN_MIGRATIONS = "1";

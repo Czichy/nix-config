@@ -29,7 +29,7 @@ in {
 
           # Identify and register this runner based on hostname
           name = "${hostname}";
-          url = "https://git.notashelf.dev";
+          url = "https://git.czichy.dev";
           tokenFile = config.age.secrets.forgejo-runner-token.path;
 
           # NOTE: changing (i.e adding or removing) labels causes your old registration token to expire

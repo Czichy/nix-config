@@ -15,11 +15,11 @@ in {
       ];
 
       ssh = [
-        (mkSshAcl "accept" ["tag:client"] ["tag:server" "tag:client"] ["notashelf"]) # client -> client; client -> server
+        (mkSshAcl "accept" ["tag:client"] ["tag:server" "tag:client"] ["czichy"]) # client -> client; client -> server
       ];
 
       tagOwners = let
-        users = ["notashelf"];
+        users = ["czichy"];
         tags = map (name: "tag:${name}") ["server" "client"];
       in
         lib.genAttrs tags (_: users);

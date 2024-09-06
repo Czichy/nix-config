@@ -62,7 +62,7 @@ bug reports, or simply moral support, they have my most sincere gratitude.
 ### Disclaimer
 
 [resources section]: #cool-resources
-[nix blog]: https://blog.notashelf.dev
+[nix blog]: https://blog.czichy.dev
 [license]: #license
 
 <!-- deno-fmt-ignore-start -->
@@ -174,7 +174,7 @@ configuration and my design considerations.
 
 [theme options]: modules/options/style
 [profiles]: modules/core/profiles
-[wallpkgs]: https://github.com/notashelf/wallpkgs
+[wallpkgs]: https://github.com/czichy/wallpkgs
 [flake-parts]: https://flake.parts
 [impermanence]: https://github.com/nix-community/impermanence
 
@@ -421,7 +421,7 @@ is best transferred via blogs on personal experience.
 - [Solène's blog](https://dataswamp.org/~solene)
 - [Zimbatm's blog](https://zimbatm.com/notes)
 - [Farid Zakaria's Blog](https://fzakaria.com/)
-- [My own blog](https://blog.notashelf.dev)
+- [My own blog](https://blog.czichy.dev)
 
 #### Guides & Other Resources
 
@@ -453,16 +453,16 @@ Projects I have made to use in this repository, or otherwise cool software that
 are used in this repository that I have contributed to, or would like to
 endorse.
 
-- [nyxexprs](https://github.com/notashelf/nyxexprs) - my personal package
+- [nyxexprs](https://github.com/czichy/nyxexprs) - my personal package
   collection
-- [nvf](https://github.com/notashelf/nvf) - highly modular Neovim configuration
+- [nvf](https://github.com/czichy/nvf) - highly modular Neovim configuration
   framework for Nix/NixOS
 - [schizofox](https://github.com/schizofox/schizofox) - hardened Firefox
   configuration for the delusional and the paranoid
 - [ndg](https://github.com/feel-co/ndg) - a module documentation framework for
   Nix projects.
 
-Additionally, take a look at my [personal blog](https://blog.notashelf.dev) for
+Additionally, take a look at my [personal blog](https://blog.czichy.dev) for
 my notes on Linux, and specifically challenging or tedious processes on Nix and
 NixOS. Some of my notes have also been left in [the docs directory](docs/).
 

@@ -20,7 +20,7 @@ in {
 
     endpoint = mkOption {
       type = str;
-      default = "https://hs.notashelf.dev";
+      default = "https://hs.czichy.dev";
       description = ''
         The URL of the Tailscale control server to use. In case you
         would like to use a self-hosted Headscale server, such as

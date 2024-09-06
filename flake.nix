@@ -1,6 +1,6 @@
 {
-  # https://github.com/NotAShelf/nyx
-  description = "My vastly overengineered monorepo for everything NixOS";
+  # https://github.com/czichy/nix-config
+  description = "My monorepo for everything NixOS";
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {

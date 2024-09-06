@@ -1,5 +1,5 @@
 let
-  homeDir = "/home/notashelf";
+  homeDir = "/home/czichy";
 in {
   fileSystems = {
     # External Devices

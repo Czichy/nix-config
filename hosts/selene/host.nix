@@ -13,7 +13,7 @@ in {
   ];
 
   config = {
-    networking.domain = "notashelf.dev";
+    networking.domain = "czichy.dev";
     services.smartd.enable = mkForce false;
 
     boot = {

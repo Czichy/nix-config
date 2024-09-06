@@ -12,7 +12,7 @@ const searchHandlers = {
     "-h": (query) =>
         `http://alpha.wallhaven.cc/search?q=${query}&categories=111&purity=100&resolutions=1920x1080&sorting=relevance&order=desc`,
     default: (query) =>
-        `https://search.notashelf.dev/search?q=${query.replaceChars(" ", "+")}&categories=general`,
+        `https://search.czichy.dev/search?q=${query.replaceChars(" ", "+")}&categories=general`,
 };
 
 function search(query) {

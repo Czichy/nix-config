@@ -20,5 +20,7 @@
     ./fmt.nix # Formatter configurations via Treefmt
     ./iso-images.nix # Build recipes for local installation media
     ./shell.nix # devShells exposed by the flake
+
+    ./globals # Global parameters
   ];
 }

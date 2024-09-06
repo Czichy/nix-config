@@ -86,7 +86,7 @@ in {
           /*
           s3_web = {
             bind_addr = "[::1]:3902";
-            root_domain = "s3.notashelf.dev";
+            root_domain = "s3.czichy.dev";
             index = "index.html";
           };
 
@@ -102,7 +102,7 @@ in {
         };
       };
 
-      nginx.virtualHosts."s3.notashelf.dev" =
+      nginx.virtualHosts."s3.czichy.dev" =
         {
           locations."/".proxyPass = "http://127.0.0.1:3900";
           extraConfig = ''

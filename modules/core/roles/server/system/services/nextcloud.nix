@@ -7,7 +7,7 @@
   inherit (lib.modules) mkIf;
   inherit (lib.meta) getExe;
 
-  domain = "cloud.notashelf.dev";
+  domain = "cloud.czichy.dev";
 
   sys = config.modules.system;
   cfg = sys.services;
@@ -60,7 +60,7 @@ in {
         config = {
           # admin user settings
           # only effective during setup
-          adminuser = "notashelf";
+          adminuser = "czichy";
           adminpassFile = config.age.secrets.nextcloud-secret.path;
 
           # database
@@ -149,7 +149,7 @@ in {
         phpExtraExtensions = ext: [ext.redis];
       };
 
-      nginx.virtualHosts."cloud.notashelf.dev" =
+      nginx.virtualHosts."cloud.czichy.dev" =
         {
           quic = true;
           http3 = true;

@@ -3,12 +3,12 @@
   pkgs,
   ...
 }: {
-  users.users.notashelf = {
+  users.users.czichy = {
     isNormalUser = true;
 
     # Home directory
     createHome = true;
-    home = "/home/notashelf";
+    home = "/home/czichy";
 
     shell = pkgs.zsh;
 
@@ -16,7 +16,7 @@
     # for tips on generating it. For security purposes, it's
     # a good idea to use a non-default hash.
     initialHashedPassword = "$2b$05$NI5/uV4JXUt/wq8hEN.NX.5rKCvCtj8JZih/seVcPIXNFIpw61v.y";
-    openssh.authorizedKeys.keys = [keys.notashelf];
+    openssh.authorizedKeys.keys = [keys.czichy];
     extraGroups = [
       "wheel"
       "systemd-journal"

@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 
-  domain = "idm.notashelf.dev";
+  domain = "idm.czichy.dev";
   certDir = config.security.acme.certs.${domain}.directory;
 
   sys = config.modules.system;

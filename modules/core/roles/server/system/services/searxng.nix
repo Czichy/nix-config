@@ -40,8 +40,8 @@ in {
           general = {
             instance_name = "NotASearx";
             privacypolicy_url = false;
-            donation_url = "https://ko-fi.com/notashelf";
-            contact_url = "mailto:raf@notashelf.dev";
+            donation_url = "https://ko-fi.com/czichy";
+            contact_url = "mailto:raf@czichy.dev";
             enable_metrics = true;
             debug = false;
           };
@@ -127,7 +127,7 @@ in {
         };
       };
 
-      nginx.virtualHosts."search.notashelf.dev" =
+      nginx.virtualHosts."search.czichy.dev" =
         {
           locations."/".proxyPass = "http://${host}:${toString port}";
           extraConfig = ''

@@ -7,7 +7,7 @@ concurrency: build
 jobs:
   build-images:
     name: "Build ISO Images"
-    if: github.repository == 'notashelf/nyx'
+    if: github.repository == 'czichy/nix-config'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -115,7 +115,7 @@ jobs:
             Both ISO images can be installed simultaneously using the following oneliner
 
             ```bash
-            REPO="notashelf/nyx"; curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq \
+            REPO="czichy/nix-config"; curl -s "https://api.github.com/repos/$REPO/releases/latest" | jq \
               -r '.assets[] | select(.content_type=="application/octet-stream") | .browser_download_url' | head \
               -n 2 | xargs \
               -n 1 wget

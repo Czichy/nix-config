@@ -38,7 +38,7 @@ in {
     nix.settings.allowed-users = ["harmonia"];
 
     services.nginx = {
-      virtualHosts."cache.notashelf.dev" =
+      virtualHosts."cache.czichy.dev" =
         {
           locations."/".extraConfig = ''
             proxy_pass http://127.0.0.1:${toString port};

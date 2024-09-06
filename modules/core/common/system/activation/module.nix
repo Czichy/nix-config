@@ -24,7 +24,7 @@ in {
     # symlink root's ssh config to ours
     # to fix nix-daemon's ability to remote build since it sshs from the root account
     root_ssh_config = let
-      sshDir = "/home/notashelf/.ssh";
+      sshDir = "/home/czichy/.ssh";
     in {
       supportsDryActivation = true;
       text = ''

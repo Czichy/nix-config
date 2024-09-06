@@ -24,8 +24,8 @@ in {
             http_addr = "0.0.0.0";
             http_port = 3000;
 
-            root_url = "https://dash.notashelf.dev";
-            domain = "dash.notashelf.dev";
+            root_url = "https://dash.czichy.dev";
+            domain = "dash.czichy.dev";
             enforce_domain = true;
           };
 
@@ -110,7 +110,7 @@ in {
         };
       };
 
-      nginx.virtualHosts."dash.notashelf.dev" =
+      nginx.virtualHosts."dash.czichy.dev" =
         {
           locations."/" = {
             proxyPass = with config.services.grafana.settings.server; "http://${toString http_addr}:${toString http_port}/";

@@ -6,7 +6,7 @@ on:
     - cron: "0 4 15 * *" # 4AM on the 15th of every month
 jobs:
   update:
-    if: github.repository == 'notashelf/nyx'
+    if: github.repository == 'czichy/nix-config'
     runs-on: ubuntu-latest
     permissions:
       contents: write

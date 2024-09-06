@@ -19,7 +19,7 @@ in {
       # manually outside your configuration.nix or whatever
       # P.S: This option requires you to define a password file for your users
       # inside your configuration.nix - you can generate this password with
-      # mkpasswd -m sha-512 > /persist/passwords/notashelf after you confirm /persist/passwords exists
+      # mkpasswd -m sha-512 > /persist/passwords/czichy after you confirm /persist/passwords exists
       mutableUsers = false;
 
       # each existing user needs to have a passwordFile defined here
@@ -29,13 +29,13 @@ in {
           # passwordFile needs to be in a volume marked with `neededForBoot = true`
           hashedPasswordFile = "/persist/passwords/root";
         };
-        notashelf = {
-          hashedPasswordFile = "/persist/passwords/notashelf";
+        czichy = {
+          hashedPasswordFile = "/persist/passwords/czichy";
         };
       };
     };
 
-    # home.persistence."/persist/home/notashelf" = {};
+    # home.persistence."/persist/home/czichy" = {};
     environment.persistence."/persist" = {
       directories =
         [
