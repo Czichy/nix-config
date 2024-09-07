@@ -43,14 +43,6 @@ in {
       '';
     };
 
-    allowOther = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        TODO
-      '';
-    };
-
     btrfsWipe = {
       enable = mkEnableOption ''
         Enable btrfs based root filesystem wiping.
@@ -158,6 +150,14 @@ in {
         ephemeral unlike root.
       '';
 
+      allowOther = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          TODO
+        '';
+      };
+
       extraFiles = mkOption {
         default = [];
         example = literalExpression ''["/etc/nix/id_rsa"]'';
@@ -181,6 +181,14 @@ in {
         the Impermanence module for persisting important state directories.
         This option will also make user's home ephemeral, on top of the root subvolume
       '';
+
+      allowOther = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          TODO
+        '';
+      };
 
       mountDotfiles = mkOption {
         default = true;

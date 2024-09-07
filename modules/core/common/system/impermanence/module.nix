@@ -103,8 +103,8 @@ with lib; let
 
   agenixCheck = (isModuleLoadedAndEnabled config "security.agenix") && cfg.agenix.enable;
 in {
-  imports = [
-    inputs.impermanence.nixosModules.impermanence
+  imports = with inputs; [
+    impermanence.nixosModules.impermanence
   ];
 
   config = mkIf cfg.enable (mkMerge [

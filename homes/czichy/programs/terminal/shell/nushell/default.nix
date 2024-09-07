@@ -1,5 +1,6 @@
 {
   osConfig,
+  config,
   lib,
   pkgs,
   ...
@@ -15,11 +16,12 @@ with lib; let
 
   sys = modules.system;
   prg = sys.programs;
+  cfg = prg.shells.nushell;
 
   _ = mkOverrideAtHmModuleLevel;
 
   impermanenceCheck =
-    (isModuleLoadedAndEnabled osConfig "sys.impermanence") && sys.impermanence.home.enable;
+    (isModuleLoadedAndEnabled osConfig "modules.system.impermanence") && sys.impermanence.home.enable;
   impermanence =
     if impermanenceCheck
     then sys.impermanence
