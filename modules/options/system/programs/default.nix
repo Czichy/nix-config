@@ -3,6 +3,7 @@
 in {
   imports = [
     ./gaming.nix
+    ./shells/nushell.nix
   ];
 
   options.modules.system.programs = {
@@ -82,7 +83,7 @@ in {
 
       editor = mkOption {
         type = types.enum ["neovim" "helix" "emacs"];
-        default = "neovim";
+        default = "helix";
       };
 
       launcher = mkOption {

@@ -3,7 +3,6 @@
     mainUser = "czichy";
     fs.enabledFilesystems = ["btrfs" "vfat" "ntfs" "exfat"];
     impermanence = {
-      enable = true;
       root.enable = true;
       home.enable = true;
     };
@@ -72,6 +71,12 @@
 
       default = {
         terminal = "foot";
+      };
+
+      shells = {
+        nushell = {
+          enable = true;
+        };
       };
 
       libreoffice.enable = true;

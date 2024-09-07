@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit (lib.trivial) const;
@@ -16,6 +17,7 @@ in {
   # and should be used conservatively. If possible, use override or `overrideAttrs` whenever
   # you are able to.
   nixpkgs.overlays = [
+    inputs.nix-topology.overlays.default
     # Some packages provide their own instances of Nix by adding `nix` to the argset
     # of a derivation. While in most cases a simple `.override` will allow you to easily
     # replace their instance of Nix, you might want to do it across the dependency tree

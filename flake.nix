@@ -13,6 +13,7 @@
       imports = [
         ./parts # Parts of the flake that are used to construct the final flake.
         ./hosts # Entrypoint for host configurations of my systems.
+        ./topology/flake-module.nix
       ];
     };
 

@@ -12,7 +12,7 @@
 in {
   config = mkIf (builtins.elem dev.type acceptedTypes) {
     home.shellAliases = {
-      "helix" = _ "hx";
+      "helix" = "hx";
     };
     programs.helix = {
       enable = false;

@@ -2,9 +2,8 @@
   config,
   lib,
   ...
-}:
-with lib; let
-  inherit (lib) mkEnableOption mkOption literalExpression mkAgenixEnableOption;
+}: let
+  inherit (lib) mkEnableOption mkOption literalExpression mkAgenixEnableOption types;
 
   cfg = config.modules.system.impermanence;
 in {
@@ -24,7 +23,7 @@ in {
     };
 
     disableSudoLectures = mkOption {
-      type = bool;
+      type = types.bool;
       default = true;
       description = ''
         Whether to disable the default sudo lectures that would be
@@ -33,7 +32,7 @@ in {
     };
 
     persistentRoot = mkOption {
-      type = path;
+      type = types.path;
       default = "/persist";
       description = ''
         Path on the already mounted filesystem for the persistent root, that is,
@@ -45,7 +44,7 @@ in {
     };
 
     allowOther = mkOption {
-      type = bool;
+      type = types.bool;
       default = false;
       description = ''
         TODO
@@ -73,7 +72,7 @@ in {
       '';
 
       rootPartition = mkOption {
-        type = path;
+        type = types.path;
         default = "/dev/sda1";
         description = ''
           The dev path for the main btrfs formatted root partition that is
@@ -82,7 +81,7 @@ in {
       };
 
       rootSubvolume = mkOption {
-        type = str;
+        type = types.str;
         default = "root";
         description = ''
           The main root btrfs subvolume path that is going to be reset to
@@ -91,7 +90,7 @@ in {
       };
 
       oldRootSubvolume = mkOption {
-        type = str;
+        type = types.str;
         default = "old_roots";
         description = ''
           The main root btrfs subvolume path that is going to be reset to
@@ -100,7 +99,7 @@ in {
       };
 
       blankRootSnapshot = mkOption {
-        type = str;
+        type = types.str;
         default = "root-blank";
         description = ''
           The btrfs snapshot of the main rootSubvolume. You will probably
@@ -112,7 +111,7 @@ in {
       };
 
       homeSubvolume = mkOption {
-        type = str;
+        type = types.str;
         default = "home";
         description = ''
           The main root btrfs subvolume path that is going to be reset to
@@ -121,7 +120,7 @@ in {
       };
 
       oldHomeSubvolume = mkOption {
-        type = str;
+        type = types.str;
         default = "old_homes";
         description = ''
           The main root btrfs subvolume path that is going to be reset to
@@ -130,7 +129,7 @@ in {
       };
 
       blankHomeSnapshot = mkOption {
-        type = str;
+        type = types.str;
         default = "home-blank";
         description = ''
           The btrfs snapshot of the main rootSubvolume. You will probably
@@ -141,7 +140,7 @@ in {
         '';
       };
       mountpoint = mkOption {
-        type = path;
+        type = types.path;
         default = "/btrfs_tmp";
         description = ''
           Temporary mountpoint that should be used for mounting and resetting
