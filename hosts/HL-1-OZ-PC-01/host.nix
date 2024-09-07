@@ -1,10 +1,10 @@
 {inputs, ...}: {
   imports = [
-    # ./fs
-    ./kernel
-    ./modules
     inputs.disko.nixosModules.disko
     ./disko.nix
+
+    ./kernel
+    ./modules
     # ./btrfs.nix
     ./networking.nix
   ];

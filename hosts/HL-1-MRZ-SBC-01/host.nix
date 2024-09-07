@@ -1,46 +1,34 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  inherit (lib.modules) mkForce;
-in {
+{inputs, ...}: {
   imports = [
-    ./fs
+    inputs.disko.nixosModules.disko
+    ./disko.nix
+
     ./modules
 
+    ./networking.nix
     ./nftables.nix
   ];
 
   config = {
+    topology.self.icon = "devices.desktop";
     networking.domain = "czichy.dev";
-    services.smartd.enable = mkForce false;
 
-    boot = {
-      growPartition = !config.boot.initrd.systemd.enable;
-      loader.grub = {
-        enable = true;
-        useOSProber = mkForce false;
-        efiSupport = mkForce false;
-        enableCryptodisk = false;
-        theme = null;
-        backgroundColor = null;
-        splashImage = null;
-        device = mkForce "/dev/disk/by-label/nixos";
-        forceInstall = true;
-      };
-    };
+    system.stateVersion = "24.05";
+    # services.smartd.enable = mkForce false;
 
-    # https://docs.hetzner.com/cloud/networks/faq/#are-any-ip-addresses-reserved
-    networking = {
-      defaultGateway = {
-        interface = "ens3";
-        address = "172.31.1.1";
-      };
-      defaultGateway6 = {
-        interface = "ens3";
-        address = "fe80::1";
-      };
-    };
+    # boot = {
+    #   growPartition = !config.boot.initrd.systemd.enable;
+    #   loader.grub = {
+    #     enable = true;
+    #     useOSProber = mkForce false;
+    #     efiSupport = mkForce false;
+    #     enableCryptodisk = false;
+    #     theme = null;
+    #     backgroundColor = null;
+    #     splashImage = null;
+    #     device = mkForce "/dev/disk/by-label/nixos";
+    #     forceInstall = true;
+    #   };
+    # };
   };
 }

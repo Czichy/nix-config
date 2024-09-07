@@ -5,6 +5,7 @@ in {
   imports = [
     ./bincache.nix
     ./databases.nix
+    ./microvm.nix
     ./monitoring.nix
     ./networking.nix
     ./social.nix
