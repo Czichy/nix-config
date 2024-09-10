@@ -1,210 +1,135 @@
 {
   withSystem,
   inputs,
+  lib,
+  config,
   ...
 }: {
-  flake.nixosConfigurations = let
-    # self.lib is an extended version of nixpkgs.lib
-    # mkNixosIso and mkNixosSystem are my own builders for assembling a nixos system
-    # provided by my local extended library
-    inherit (inputs.self) lib;
-    inherit (lib) mkNixosIso mkNixosSystem mkModuleTree';
-    inherit (lib.lists) concatLists flatten singleton;
+  flake = 
+    nixosConfigurations = let
+      # self.lib is an extended version of nixpkgs.lib
+      # mkNixosIso and mkNixosSystem are my own builders for assembling a nixos system
+      # provided by my local extended library
+      inherit (inputs.self) lib;
+      inherit (lib) mkNixosIso mkNixosSystem mkModuleTree';
+      inherit (lib.lists) concatLists flatten singleton;
 
-    ## flake inputs ##
-    hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
-    agenix = inputs.agenix.nixosModules.default; # secret encryption via age
-    hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
-    topology = inputs.nix-topology.nixosModules.default; # infrastructure and network diagrams directly from your NixOS configurations
-    disko = inputs.disko.nixosModules.disko; # declarative disk partitioning and formatting
+      ## flake inputs ##
+      hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
+      agenix = inputs.agenix.nixosModules.default; # secret encryption via age
+      hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
+      topology = inputs.nix-topology.nixosModules.default; # infrastructure and network diagrams directly from your NixOS configurations
+      disko = inputs.disko.nixosModules.disko; # declarative disk partitioning and formatting
 
-    # Specify root path for the modules. The concept is similar to modulesPath
-    # that is found in nixpkgs, and is defined in case the modulePath changes
-    # depth (i.e modules becomes nixos/modules).
-    modulePath = ../modules;
+      extra = inputs.nixos-extra-modules.nixosModules.default;
+      extra_overlays = inputs.nixos-extra-modules.overlays.default;
 
-    coreModules = modulePath + /core; # the path where common modules reside
-    extraModules = modulePath + /extra; # the path where extra modules reside
-    options = modulePath + /options; # the module that provides the options for my system configuration
+      # Specify root path for the modules. The concept is similar to modulesPath
+      # that is found in nixpkgs, and is defined in case the modulePath changes
+      # depth (i.e modules becomes nixos/modules).
+      modulePath = ../modules;
 
-    ## common modules ##
-    # The opinionated defaults for all systems, generally things I want on all hosts
-    # regardless of their role in the general ecosystem. E.g. both servers and workstations
-    # will share the defaults below.
-    common = coreModules + /common; # the self-proclaimed sane defaults for all my systems
-    profiles = coreModules + /profiles; # force defaults based on selected profile
+      coreModules = modulePath + /core; # the path where common modules reside
+      extraModules = modulePath + /extra; # the path where extra modules reside
+      options = modulePath + /options; # the module that provides the options for my system configuration
 
-    ## roles ##
-    # Roles either provide an additional set of defaults on top of the core module
-    # or override existing defaults for role-specific optimizations.
-    iso = coreModules + /roles/iso; # for providing a uniform ISO configuration for live systems - only the build setup
-    headless = coreModules + /roles/headless; # for devices that are of the headless type - provides no GUI
-    graphical = coreModules + /roles/graphical; # for devices that are of the graphical type - provides a GUI
-    workstation = coreModules + /roles/workstation; # for devices that are of workstation type - any device that is for daily use
-    server = coreModules + /roles/server; # for devices that are of the server type - provides online services
-    laptop = coreModules + /roles/laptop; # for devices that are of the laptop type - provides power optimizations
+      ## common modules ##
+      # The opinionated defaults for all systems, generally things I want on all hosts
+      # regardless of their role in the general ecosystem. E.g. both servers and workstations
+      # will share the defaults below.
+      common = coreModules + /common; # the self-proclaimed sane defaults for all my systems
+      profiles = coreModules + /profiles; # force defaults based on selected profile
 
-    # extra modules - optional but likely critical to a successful build
-    sharedModules = extraModules + /shared; # the path where shared modules reside
+      ## roles ##
+      # Roles either provide an additional set of defaults on top of the core module
+      # or override existing defaults for role-specific optimizations.
+      iso = coreModules + /roles/iso; # for providing a uniform ISO configuration for live systems - only the build setup
+      headless = coreModules + /roles/headless; # for devices that are of the headless type - provides no GUI
+      graphical = coreModules + /roles/graphical; # for devices that are of the graphical type - provides a GUI
+      workstation = coreModules + /roles/workstation; # for devices that are of workstation type - any device that is for daily use
+      server = coreModules + /roles/server; # for devices that are of the server type - provides online services
+      laptop = coreModules + /roles/laptop; # for devices that are of the laptop type - provides power optimizations
 
-    # home-manager #
-    homesPath = ../homes; # home-manager configurations for hosts that need home-manager
-    homes = [hm homesPath]; # combine hm flake input and the home module to be imported together
+      # extra modules - optional but likely critical to a successful build
+      sharedModules = extraModules + /shared; # the path where shared modules reside
 
-    # a list of shared modules that ALL systems need
-    shared = [
-      sharedModules # consume my flake's own nixosModules
-      agenix # age encryption for secrets
-      topology # infrastructure and network diagrams directly from your NixOS configurations
-    ];
+      # home-manager #
+      homesPath = ../homes; # home-manager configurations for hosts that need home-manager
+      homes = [hm homesPath]; # combine hm flake input and the home module to be imported together
 
-    # mkModulesFor generates a list of modules to be imported by any host with
-    # a given hostname. Do note that this needs to be called *in* the nixosSystem
-    # set, since it generates a *module list*, which is also expected by system
-    # builders.
-    mkModulesFor = hostname: {
-      moduleTrees ? [options common profiles],
-      roles ? [],
-      extraModules ? [],
-    } @ args:
-      flatten (
-        concatLists [
-          # Derive host specific module path from the first argument of the
-          # function. Should be a string, obviously.
-          (singleton ./${hostname}/host.nix)
+      # a list of shared modules that ALL systems need
+      shared = [
+        sharedModules # consume my flake's own nixosModules
+        agenix # age encryption for secrets
+        topology # infrastructure and network diagrams directly from your NixOS configurations
+        ../globals.nix
+      ];
 
-          # Recursively import all module trees (i.e. directories with a `module.nix`)
-          # for given moduleTree directories, and in addition, roles.
-          (map (path: mkModuleTree' {inherit path;}) (concatLists [moduleTrees roles]))
+      # mkModulesFor generates a list of modules to be imported by any host with
+      # a given hostname. Do note that this needs to be called *in* the nixosSystem
+      # set, since it generates a *module list*, which is also expected by system
+      # builders.
+      mkModulesFor = hostname: {
+        moduleTrees ? [options common profiles],
+        roles ? [],
+        extraModules ? [],
+      } @ args:
+        flatten (
+          concatLists [
+            # Derive host specific module path from the first argument of the
+            # function. Should be a string, obviously.
+            (singleton ./${hostname}/host.nix)
 
-          # And append any additional lists that don't don't conform to the moduleTree
-          # API, but still need to be imported somewhat commonly.
-          args.extraModules
-        ]
-      );
-  in {
-    # My main desktop boasting a RX 6700XT and a Ryzen 5 3600x
-    # fully free from nvidia
-    "HL-1-OZ-PC-01" = mkNixosSystem {
-      inherit withSystem;
-      hostname = "HL-1-OZ-PC-01";
-      system = "x86_64-linux";
-      modules = mkModulesFor "HL-1-OZ-PC-01" {
-        roles = [graphical workstation];
-        extraModules = [disko shared homes];
+            # Recursively import all module trees (i.e. directories with a `module.nix`)
+            # for given moduleTree directories, and in addition, roles.
+            (map (path: mkModuleTree' {inherit path;}) (concatLists [moduleTrees roles]))
+
+            # And append any additional lists that don't don't conform to the moduleTree
+            # API, but still need to be imported somewhat commonly.
+            args.extraModules
+          ]
+        );
+    in {
+      # My main desktop boasting a RX 6700XT and a Ryzen 5 3600x
+      # fully free from nvidia
+      "HL-1-OZ-PC-01" = mkNixosSystem {
+        inherit withSystem;
+        hostname = "HL-1-OZ-PC-01";
+        system = "x86_64-linux";
+        modules = mkModulesFor "HL-1-OZ-PC-01" {
+          roles = [graphical workstation];
+          extraModules = [disko shared homes];
+        };
+      };
+
+      # hosts some of my infrastructure
+      "HL-1-MRZ-SBC-01" = mkNixosSystem {
+        inherit withSystem;
+        hostname = "HL-1-MRZ-SBC-01";
+        system = "x86_64-linux";
+        modules = mkModulesFor "HL-1-MRZ-SBC-01" {
+          roles = [server headless];
+          extraModules = [disko shared homes];
+        };
       };
     };
+    # True NixOS nodes can define additional guest nodes that are built
+    # together with it. We collect all defined guests from each node here
+    # to allow accessing any node via the unified attribute `nodes`.
+    guestConfigs = flip concatMapAttrs config.nixosConfigurations (_: node:
+      flip mapAttrs' (node.config.guests or {}) (
+        guestName: guestDef:
+          nameValuePair guestDef.nodeName (
+            if guestDef.backend == "microvm"
+            then node.config.microvm.vms.${guestName}.config
+            else node.config.containers.${guestName}.nixosConfiguration
+          )
+      ));
 
-    # hosts some of my infrastructure
-    "HL-1-MRZ-SBC-01" = mkNixosSystem {
-      inherit withSystem;
-      hostname = "HL-1-MRZ-SBC-01";
-      system = "x86_64-linux";
-      modules = mkModulesFor "HL-1-MRZ-SBC-01" {
-        roles = [server headless];
-        extraModules = [disko shared homes];
-      };
-    };
-
-    # # Hetzner VPS to replace my previous server machines
-    # # hosts some of my infrastructure
-    # selene = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "helios";
-    #   system = "aarch64-linux";
-    #   modules = mkModulesFor "selene" {
-    #     roles = [server headless];
-    #     extraModules = [shared homes];
-    #   };
-    # };
-
-    # # Lenovo Ideapad from 2014
-    # # Hybrid device
-    # # acts as a portable server and a "workstation"
-    # icarus = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "icarus";
-    #   system = "x86_64-linux";
-    #   modules = mkModulesFor "icarus" {
-    #     roles = [graphical workstation laptop server];
-    #     extraModules = [shared homes];
-    #   };
-    # };
-
-    # # Raspberry Pi 400
-    # # My Pi400 homelab
-    # # used mostly for testing networking/cloud services
-    # atlas = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "atlas";
-    #   system = "aarch64-linux";
-    #   modules = mkModulesFor "atlas" {
-    #     roles = [server headless];
-    #     extraModules = [shared hw.raspberry-pi-4];
-    #   };
-    # };
-
-    # # Self-made live recovery environment that overrides or/and configures certain default programs
-    # # provides tools and fixes the keymaps for my keyboard
-    # gaea = mkNixosIso {
-    #   hostname = "gaea";
-    #   system = "x86_64-linux";
-    #   specialArgs = {inherit lib;};
-    #   modules = mkModulesFor "gaea" {
-    #     moduleTrees = [];
-    #     roles = [iso headless];
-    #     extraModules = [shared];
-    #   };
-    # };
-
-    # # An air-gapped NixOS live media to deal with
-    # # sensitive tooling (e.g. Yubikey, GPG, etc.)
-    # # isolated from all networking
-    # erebus = mkNixosIso {
-    #   inherit withSystem;
-    #   hostname = "erebus";
-    #   system = "x86_64-linux";
-    #   modules = mkModulesFor "erebus" {
-    #     moduleTrees = [];
-    #     roles = [iso];
-    #     extraModules = [shared];
-    #   };
-    # };
-
-    # # Pretty beefy VM running on my dedicated server
-    # # is mostly for testing, but can run services at will
-    # leto = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "leto";
-    #   system = "x86_64-linux";
-    #   modules = mkModulesFor "leto" {
-    #     roles = [server headless];
-    #     extraModules = [shared homes];
-    #   };
-    # };
-
-    # # Twin virtual machine hosts
-    # # Artemis is x86_64-linux
-    # artemis = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "artemis";
-    #   system = "x86_64-linux";
-    #   modules = mkModulesFor "artemis" {
-    #     roles = [server headless];
-    #     extraModules = [shared];
-    #   };
-    # };
-
-    # # Apollon is also x86_64-linux
-    # # but is for testing server-specific services
-    # apollon = mkNixosSystem {
-    #   inherit withSystem;
-    #   hostname = "apollon";
-    #   system = "aarch64-linux";
-    #   modules = mkModulesFor "apollon" {
-    #     roles = [server headless];
-    #     extraModules = [shared];
-    #   };
-    # };
+    # All nixosSystem instanciations are collected here, so that we can refer
+    # to any system via nodes.<name>
+    nodes = config.nixosConfigurations // config.guestConfigs;
+    # Add a shorthand to easily target toplevel derivations
+    "@" = mapAttrs (_: v: v.config.system.build.toplevel) config.nodes;
   };
 }

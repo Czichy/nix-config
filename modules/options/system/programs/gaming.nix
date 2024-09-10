@@ -20,5 +20,6 @@ in {
     gamemode.enable = mkEnableOption "Feral-Interactive's Gamemode with userspace optimizations" // {default = prg.gaming.enable;};
     gamescope.enable = mkEnableOption "Gamescope compositing manager" // {default = prg.gaming.enable;};
     mangohud.enable = mkEnableOption "MangoHud overlay" // {default = prg.gaming.enable;};
+    minecraft.enable = mkEnableOption "Minecraft" // {default = prg.gaming.enable;};
   };
 }

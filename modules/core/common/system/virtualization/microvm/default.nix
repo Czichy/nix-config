@@ -7,14 +7,9 @@
   # utils,
   ...
 } @ attrs: let
-  inherit
-    (lib)
-    mkOption
-    types
-    ;
-  inherit (lib) isModuleLoadedAndEnabled mergeToplevelConfigs mapAttrsToList;
+  inherit (lib) isModuleLoadedAndEnabled mergeToplevelConfigs;
   cfg = config.modules.system.services.microvm;
-  sys = modules.system;
+  sys = config.modules.system;
 
   generateMacAddress = s: let
     hash = builtins.hashString "sha256" s;

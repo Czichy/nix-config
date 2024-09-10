@@ -270,4 +270,19 @@ in {
       };
     };
   };
+
+  nodes.vzlogger = {
+    # guestType = "qemu";
+    deviceType = "cloud-server";
+    # deviceIcon = ./icons/server-svgrepo-com.svg;
+    # parent = "HL-1-MRZ-SBC-01";
+    interfaces = {
+      trust = {
+        network = "servers";
+        addresses = ["10.15.40.13/24"];
+        virtual = true;
+        # physicalConnections = [(mkConnection "switch-keller" "eth16")];
+      };
+    };
+  };
 }

@@ -1,40 +1,34 @@
 {
-  self',
   inputs,
   osConfig,
+  config,
+  pkgs,
   lib,
   ...
-}: let
-  inherit (builtins) listToAttrs;
-  inherit (lib.modules) mkIf;
+}:
+with builtins;
+with lib; let
   inherit (osConfig) modules;
+  inherit
+    (lib)
+    mkOverrideAtHmModuleLevel
+    isModuleLoadedAndEnabled
+    ;
 
   sys = modules.system;
   prg = sys.programs;
+  cfg = prg.firefox;
 
-  cfg = config.tensorfiles.hm.programs.browsers.firefox;
   _ = mkOverrideAtHmModuleLevel;
 
-  plasmaCheck = isModuleLoadedAndEnabled config "tensorfiles.hm.profiles.graphical-plasma";
-
   impermanenceCheck =
-    (isModuleLoadedAndEnabled config "tensorfiles.hm.system.impermanence") && cfg.impermanence.enable;
+    (isModuleLoadedAndEnabled osConfig "modules.system.impermanence") && sys.impermanence.home.enable;
   impermanence =
     if impermanenceCheck
-    then config.tensorfiles.hm.system.impermanence
+    then sys.impermanence
     else {};
   pathToRelative = strings.removePrefix "${config.home.homeDirectory}/";
 in {
-  options.tensorfiles.hm.programs.browsers.firefox = with types; {
-    enable = mkEnableOption ''
-      TODO
-    '';
-
-    impermanence = {
-      enable = mkImpermanenceEnableOption;
-    };
-  };
-
   config = mkIf cfg.enable (mkMerge [
     # |----------------------------------------------------------------------| #
     {
@@ -364,6 +358,4 @@ in {
     })
     # |----------------------------------------------------------------------| #
   ]);
-
-  meta.maintainers = with localFlake.lib.tensorfiles.maintainers; [czichy];
 }

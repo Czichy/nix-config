@@ -13,15 +13,15 @@ in {
   imports = [
     ./minecraft.nix
     ./mangohud.nix
-    ./chess.nix
+    # ./chess.nix
   ];
 
   config = mkIf prg.gaming.enable {
-    home.packages = with pkgs; [
-      # runtime
-      dotnet-runtime_6 # for running terraria manually, from binary
-      mono # general dotnet apps
-      winetricks # wine helper utility
-    ];
+    # home.packages = with pkgs; [
+    # runtime
+    # dotnet-runtime_6 # for running terraria manually, from binary
+    # mono # general dotnet apps
+    # winetricks # wine helper utility
+    # ];
   };
 }

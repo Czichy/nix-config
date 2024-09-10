@@ -308,6 +308,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-extra-modules = {
+      url = "github:czichy/nixos-extra-modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-inspect.url = "github:bluskript/nix-inspect";
 
     nixos-nftables-firewall = {
