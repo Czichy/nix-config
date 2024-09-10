@@ -14,7 +14,7 @@ in {
     # tldr: realtime processes have higher priority than normal processes
     # and that's a good thing
     users = {
-      users."${config.modules.system.mainUser}".extraGroups = ["audio"];
+      users."${config.modules.system.users.mainUser}".extraGroups = ["audio"];
       groups.audio = {};
     };
 

@@ -117,7 +117,7 @@ in {
   config = {
     assertions = [
       {
-        assertion = cfg.useHomeManager -> sys.mainUser != null;
+        assertion = cfg.useHomeManager -> sys.users.mainUser != null;
         message = "modules.system.mainUser must be set while modules.usrEnv.useHomeManager is enabled";
       }
     ];

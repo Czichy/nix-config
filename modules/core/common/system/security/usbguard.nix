@@ -11,7 +11,7 @@
 in {
   config = mkIf sys.security.usbguard.enable {
     services.usbguard = {
-      IPCAllowedUsers = ["root" "${env.mainUser}"];
+      IPCAllowedUsers = ["root" "${sys.users.mainUser}"];
       presentDevicePolicy = "allow";
       rules = ''
         allow with-interface equals { 08:*:* }

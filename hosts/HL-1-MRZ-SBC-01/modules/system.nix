@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   config.modules.system = {
-    mainUser = "czichy";
+    # mainUser = "czichy";
     fs.enabledFilesystems = ["btrfs" "vfat" "exfat" "ext4"];
     impermanence = {
       root.enable = true;

@@ -9,6 +9,6 @@ in {
   services.transience = {
     enable = false;
     directories = [];
-    user = sys.mainUser;
+    user = sys.users.mainUser;
   };
 }

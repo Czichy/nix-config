@@ -58,31 +58,6 @@ in {
   };
 
   options.modules.system = {
-    mainUser = mkOption {
-      type = enum config.modules.system.users;
-      default = elemAt config.modules.system.users 0;
-      description = ''
-        The username of the main user for your system.
-
-        In case of a multiple systems, this will be the user with priority in ordered lists and enabled options.
-      '';
-    };
-
-    # users = mkOption {
-    #   type = listOf str;
-    #   default = ["czichy"];
-    #   description = "A list of home-manager users on the system.";
-    # };
-
-    # autoLogin = mkOption {
-    #   type = bool;
-    #   default = false;
-    #   description = ''
-    #     Whether to enable passwordless login. This is generally useful on systems with
-    #     FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
-    #   '';
-    # };
-
     yubikeySupport = {
       enable = mkEnableOption "yubikey support";
       deviceType = mkOption {

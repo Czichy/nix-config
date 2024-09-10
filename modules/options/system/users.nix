@@ -13,6 +13,8 @@ with lib; let
     ;
 
   _ = mkOverrideAtModuleLevel;
+
+  cfg = config.modules.system.users;
 in {
   # TODO move bluetooth dir to hardware
   options.modules.system.users = with types; {
@@ -30,7 +32,32 @@ in {
       enable = mkAgenixEnableOption;
     };
 
+    mainUser = mkOption {
+      type = str;
+      default = elemAt (filter (_user:cfg.usersSettings. "${_user}".isMainUser) (lib.attrNames cfg.usersSettings)) 0;
+      readOnly = true;
+      description = ''
+        The username of the main user for your system.
+        In case of a multiple systems, this will be the user with priority in ordered lists and enabled options.
+      '';
+    };
+    # ers =
+    #   genAttrs (attrNames cfg.usersSettings)
+    #   (_user: let
+    #     userCfg = cfg.usersSettings."${_user}".isMainUser;
+    #   in {
+    #     myOption = userCfg.myOption;
+    #     myOtherOption = 2 * userCfg.myOtherOption;
+    #   });
     usersSettings = mkUsersSettingsOption (_user: {
+      isMainUser = mkOption {
+        type = bool;
+        default = false;
+        description = ''
+          The username of the main user for your system.
+          In case of a multiple systems, this will be the user with priority in ordered lists and enabled options.
+        '';
+      };
       isSudoer = mkOption {
         type = bool;
         default = true;
@@ -48,6 +75,23 @@ in {
           binary cache)
         '';
       };
+
+      useHomeManager = mkOption {
+        type = bool;
+        default = false;
+        description = ''
+          use home-manager
+        '';
+      };
+
+      # autoLogin = mkOption {
+      #   type = bool;
+      #   default = false;
+      #   description = ''
+      #     Whether to enable passwordless login. This is generally useful on systems with
+      #     FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
+      #   '';
+      # };
 
       uid = mkOption {
         type = types.nullOr types.int;
@@ -110,5 +154,14 @@ in {
         };
       };
     });
+  };
+
+  config = {
+    assertions = [
+      {
+        assertion = cfg.useHomeManager -> sys.users.mainUser != null;
+        message = "modules.system.mainUser must be set while modules.usrEnv.useHomeManager is enabled";
+      }
+    ];
   };
 }

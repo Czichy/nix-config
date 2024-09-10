@@ -19,7 +19,7 @@
   ];
 
   initialSession = {
-    user = "${sys.mainUser}";
+    user = "${sys.users.mainUser}";
     command = "${env.desktop}";
   };
 

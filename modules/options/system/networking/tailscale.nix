@@ -30,7 +30,7 @@ in {
 
     operator = mkOption {
       type = str;
-      default = sys.mainUser;
+      default = sys.users.mainUser;
       description = ''
         The name of the Tailscale operator to use. This is used to
         avoid using sudo in command-line operations and if set, will

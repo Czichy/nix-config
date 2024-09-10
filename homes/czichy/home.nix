@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.agenix.homeManagerModules.age
     # home package sets
@@ -18,7 +22,7 @@
   config = {
     home = {
       username = "czichy";
-      homeDirectory = "/home/czichy";
+      homeDirectory = lib.mkDefault "/home/czichy";
       extraOutputsToInstall = ["doc" "devdoc"];
 
       # This is, and should remain, the version on which you have initiated
