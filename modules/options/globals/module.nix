@@ -195,6 +195,25 @@ in {
               });
             };
           };
+          mail = {
+            domains = mkOption {
+              default = {};
+              description = "All domains on which we receive mail.";
+              type = types.attrsOf (types.submodule {
+                options = {
+                  public = mkOption {
+                    type = types.bool;
+                    description = "Whether the domain should be available for use by any user";
+                  };
+                };
+              });
+            };
+
+            primary = mkOption {
+              type = types.str;
+              description = "The primary mail domain.";
+            };
+          };
 
           domains = {
             me = mkOption {

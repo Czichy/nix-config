@@ -1,6 +1,6 @@
 {
   config.modules.system.services = {
-    # microvm.enable = true;
+    microvm.enable = true;
     # nextcloud.enable = true;
     # mailserver.enable = true;
     # vaultwarden.enable = true;

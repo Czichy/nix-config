@@ -1,5 +1,6 @@
 {
   imports = [
+    ./microvm
     ./distrobox.nix
     ./podman.nix
     ./qemu.nix
