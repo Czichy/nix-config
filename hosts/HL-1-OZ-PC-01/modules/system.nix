@@ -6,7 +6,6 @@
       root.enable = true;
       home.enable = true;
     };
-    # autoLogin = true;
 
     boot = {
       loader = "systemd-boot";
@@ -48,7 +47,8 @@
         isServer = false;
       };
     };
-    agenix.enable = true;
+    agenix.root.enable = true;
+    agenix.home.enable = true;
 
     security = {
       tor.enable = true;

@@ -1,5 +1,6 @@
-{
+{inputs, ...}: {
   imports = [
+    inputs.agenix.homeManagerModules.age
     # home package sets
     ./packages
 

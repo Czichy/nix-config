@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  hostName,
   ...
 }:
 with builtins;
@@ -14,7 +13,7 @@ with lib; let
 in {
   # TODO maybe use toINIWithGlobalSection generator? however the ini config file
   # also contains some initial keys? I should investigate this more
-  options.modules.programs.ib-tws = with types; {
+  options.modules.system.programs.ib-tws = with types; {
     enable = mkEnableOption ''
       TODO
     '';
@@ -24,21 +23,21 @@ in {
     agenix = {
       enable = mkAgenixEnableOption;
     };
-    # TODO maybe use config using latest and/or stable
-    passwordSecretsPath = mkOption {
-      type = str;
-      default = "hosts/${hostName}/users/${config.home.username}/ibkr/password";
-      description = ''
-        TODO
-      '';
-    };
+    # # TODO maybe use config using latest and/or stable
+    # passwordSecretsPath = mkOption {
+    #   type = str;
+    #   default = "hosts/${config.meta.hostname}/users/${config.home.username}/ibkr/password";
+    #   description = ''
+    #     TODO
+    #   '';
+    # };
 
-    userSecretsPath = mkOption {
-      type = str;
-      default = "hosts/${hostName}/users/${config.home.username}/ibkr/user";
-      description = ''
-        TODO
-      '';
-    };
+    # userSecretsPath = mkOption {
+    #   type = str;
+    #   default = "hosts/${config.meta.hostname}/users/${config.home.username}/ibkr/user";
+    #   description = ''
+    #     TODO
+    #   '';
+    # };
   };
 }

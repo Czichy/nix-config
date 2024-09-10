@@ -1,7 +1,7 @@
 {
   imports = [
     ./comma
-    ./wakapi
+    # ./wakapi
     ./reposilite
   ];
 }

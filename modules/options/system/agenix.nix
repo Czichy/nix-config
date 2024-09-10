@@ -3,48 +3,91 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkOption;
 in {
   options.modules.system.agenix = with lib.types; {
-    enable = mkEnableOption ''
-      Enables NixOS module that sets up & configures the agenix secrets
-      backend.
-
-      References
-      - https://github.com/ryantm/agenix
-      - https://nixos.wiki/wiki/Agenix
-    '';
-    secretsPath = lib.mkOption {
-      type = path;
-      default = "${inputs.private}";
-      #default = ./secrets;
-      description = "Path to the actual secrets directory";
-    };
-
-    pubkeys = lib.mkOption {
-      type = attrsOf (attrsOf anything);
-      default = {};
+    enable = mkOption {
+      default = cfg.root.enable || cfg.home.enable;
+      readOnly = true;
       description = ''
-        The resulting option that will hold the various public keys used around
-        the flake.
+        Internal option for deciding if Impermanence module is enabled
+        based on the values of `modules.system.impermanence.root.enable`
+        and `modules.system.impermanence.home.enable`.
       '';
     };
+    root = {
+      enable =
+        mkEnableOption ''
+        '';
+      secretsPath = mkOption {
+        type = path;
+        default = "${inputs.private}";
+        #default = ./secrets;
+        description = "Path to the actual secrets directory";
+      };
 
-    pubkeysFile = lib.mkOption {
-      type = path;
-      default = ./pubkeys.nix;
-      description = ''
-        Path to the pubkeys file that will be used to construct the
-        `secrets.pubkeys` option.
-      '';
+      pubkeys = mkOption {
+        type = attrsOf (attrsOf anything);
+        default = {};
+        description = ''
+          The resulting option that will hold the various public keys used around
+          the flake.
+        '';
+      };
+
+      pubkeysFile = mkOption {
+        type = path;
+        default = ./pubkeys.nix;
+        description = ''
+          Path to the pubkeys file that will be used to construct the
+          `secrets.pubkeys` option.
+        '';
+      };
+
+      extraPubkeys = mkOption {
+        type = attrsOf (attrsOf anything);
+        default = {};
+        description = ''
+          Additional public keys that will be merged into the `secrets.pubkeys`
+        '';
+      };
     };
+    home = {
+      enable =
+        mkEnableOption ''
+        '';
+      secretsPath = mkOption {
+        type = path;
+        default = "${inputs.private}";
+        #default = ./secrets;
+        description = "Path to the actual secrets directory";
+      };
 
-    extraPubkeys = lib.mkOption {
-      type = attrsOf (attrsOf anything);
-      default = {};
-      description = ''
-        Additional public keys that will be merged into the `secrets.pubkeys`
-      '';
+      pubkeys = mkOption {
+        type = attrsOf (attrsOf anything);
+        default = {};
+        description = ''
+          The resulting option that will hold the various public keys used around
+          the flake.
+        '';
+      };
+
+      pubkeysFile = mkOption {
+        type = path;
+        default = ./pubkeys.nix;
+        description = ''
+          Path to the pubkeys file that will be used to construct the
+          `secrets.pubkeys` option.
+        '';
+      };
+
+      extraPubkeys = mkOption {
+        type = attrsOf (attrsOf anything);
+        default = {};
+        description = ''
+          Additional public keys that will be merged into the `secrets.pubkeys`
+        '';
+      };
     };
   };
 }

@@ -1,3 +1,7 @@
-{
-  users.users.root.hashedPassword = "*"; # lock root account
+{...}: {
+  modules.system.users.usersSettings."root" = {
+    agenixPassword.enable = true;
+    uid = 0;
+    gid = 0;
+  };
 }

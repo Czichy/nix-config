@@ -75,6 +75,7 @@
       sharedModules # consume my flake's own nixosModules
       agenix # age encryption for secrets
       topology # infrastructure and network diagrams directly from your NixOS configurations
+      microvm # Include the microvm host module
       ../globals.nix
     ];
 
@@ -123,7 +124,7 @@
         system = "x86_64-linux";
         modules = mkModulesFor "HL-1-MRZ-SBC-01" {
           roles = [server headless];
-          extraModules = [disko shared homes microvm];
+          extraModules = [disko shared homes];
         };
       };
     };

@@ -19,6 +19,10 @@ with lib; let
   prg = sys.programs;
   cfg = prg.ib-tws;
 
+  passwordSecretsPath = "hosts/${osConfig.meta.hostname}/users/${config.home.username}/ibkr/password";
+
+  userSecretsPath = "hosts/${osConfig.meta.hostname}/users/${config.home.username}/ibkr/user";
+
   _ = mkOverrideAtHmModuleLevel;
 
   impermanenceCheck =
@@ -44,14 +48,14 @@ in {
       mkIf agenixCheck
       {
         age.secrets = {
-          "${cfg.userSecretsPath}" = {
+          "${userSecretsPath}" = {
             # symlink = true;
-            file = _ (secretsPath + "/${cfg.userSecretsPath}.age");
+            file = _ (secretsPath + "/${userSecretsPath}.age");
             mode = _ "0600";
           };
-          "${cfg.passwordSecretsPath}" = {
+          "${passwordSecretsPath}" = {
             # symlink = true;
-            file = _ (secretsPath + "/${cfg.passwordSecretsPath}.age");
+            file = _ (secretsPath + "/${passwordSecretsPath}.age");
             mode = _ "0600";
           };
         };

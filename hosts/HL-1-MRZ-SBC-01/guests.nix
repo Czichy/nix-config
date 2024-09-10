@@ -130,7 +130,7 @@ in {
     in (
       {}
       // mkMicrovm "adguardhome" {enableStorageDataset = true;}
-      # // mkMicrovm "vaultwarden" {enableStorageDataset = true;}
+      // mkMicrovm "vaultwarden" {enableStorageDataset = true;}
       # // mkMicrovm "unifi" {enableStorageDataset = true;}
     );
   };

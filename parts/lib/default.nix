@@ -136,7 +136,7 @@
     inherit (self.extendedLib.fs) mkBtrfs;
     inherit (self.extendedLib.hardware) isx86Linux primaryMonitor;
     inherit (self.extendedLib.misc) filterNixFiles importNixFiles boolToNum fetchKeys containsStrings indexOf intListToStringList mergeToplevelConfigs;
-    inherit (self.extendedLib.modules) mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled;
+    inherit (self.extendedLib.modules) mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled mkOverrideAtHmModuleLevel mkOverrideAtHmProfileLevel mkOverrideAtModuleLevel mkOverrideAtProfileLevel;
     inherit (self.extendedLib.namespacing) makeSocketNsPhysical makeServiceNsPhysical unRestrictNamespaces;
     inherit (self.extendedLib.net) net;
     inherit (self.extendedLib.networking) isValidIPv4;

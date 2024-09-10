@@ -41,6 +41,9 @@ in {
 
     # agenix secrets
     ./agenix.nix
+
+    #users definitions
+    ./users.nix
   ];
   config = {
     warnings = mkMerge [
@@ -65,20 +68,20 @@ in {
       '';
     };
 
-    users = mkOption {
-      type = listOf str;
-      default = ["czichy"];
-      description = "A list of home-manager users on the system.";
-    };
+    # users = mkOption {
+    #   type = listOf str;
+    #   default = ["czichy"];
+    #   description = "A list of home-manager users on the system.";
+    # };
 
-    autoLogin = mkOption {
-      type = bool;
-      default = false;
-      description = ''
-        Whether to enable passwordless login. This is generally useful on systems with
-        FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
-      '';
-    };
+    # autoLogin = mkOption {
+    #   type = bool;
+    #   default = false;
+    #   description = ''
+    #     Whether to enable passwordless login. This is generally useful on systems with
+    #     FDE (Full Disk Encryption) enabled. It is a security risk for systems without FDE.
+    #   '';
+    # };
 
     yubikeySupport = {
       enable = mkEnableOption "yubikey support";

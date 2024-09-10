@@ -1,9 +1,49 @@
-{lib, ...}: let
+{lib, ...}:
+with lib; let
   inherit (builtins) filter map toString elem hasAttr head tail length;
   inherit (lib.filesystem) listFilesRecursive;
   inherit (lib.strings) hasSuffix splitString;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) str int;
+
+  # <nixpkgs>/lib/modules.nix priorities:
+  # mkOptionDefault = 1500: priority of option defaults
+  # mkDefault = 1000: used in config sections of non-user modules to set a default
+  # mkImageMediaOverride = 60:
+  # mkForce = 50:
+  # mkVMOverride = 10: used by ‘nixos-rebuild build-vm’
+
+  /*
+  mkOverride function with a preset priority set for all of the
+  home-manager modules.
+
+  *Type*: `mkOverrideAtModuleLevel :: AttrSet a -> { _type :: String; priority :: Int; content :: AttrSet a; }`
+  */
+  mkOverrideAtHmModuleLevel = mkOverride 700;
+
+  /*
+  mkOverride function with a preset priority set for all of the
+  home-manager profile modules.
+
+  *Type*: `mkOverrideAtHmProfileLevel :: AttrSet a -> { _type :: String; priority :: Int; content :: AttrSet a; }`
+  */
+  mkOverrideAtHmProfileLevel = mkOverride 600;
+
+  /*
+  mkOverride function with a preset priority set for all of the nixos
+  modules.
+
+  *Type*: `mkOverrideAtModuleLevel :: AttrSet a -> { _type :: String; priority :: Int; content :: AttrSet a; }`
+  */
+  mkOverrideAtModuleLevel = mkOverride 500;
+
+  /*
+  mkOverride function with a preset priority set for all of the nixos
+  profiles, that is, modules that preconfigure other modules.
+
+  *Type*: `mkOverrideAtProfileLevel :: AttrSet a -> { _type :: String; priority :: Int; content :: AttrSet a; }`
+  */
+  mkOverrideAtProfileLevel = mkOverride 400;
 
   # Recursively checks the presence of a nixos/home-manager module and whether
   # its enabled.
@@ -96,5 +136,5 @@
       // extraOptions;
   };
 in {
-  inherit mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled;
+  inherit mkService mkModuleTree mkModuleTree' isModuleLoadedAndEnabled mkOverrideAtHmModuleLevel mkOverrideAtHmProfileLevel mkOverrideAtModuleLevel mkOverrideAtProfileLevel;
 }

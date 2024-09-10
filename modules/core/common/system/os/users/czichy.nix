@@ -1,41 +1,31 @@
-{
-  keys,
-  pkgs,
-  ...
-}: {
-  users.users.czichy = {
-    isNormalUser = true;
-
-    # Home directory
-    createHome = true;
-    home = "/home/czichy";
-
-    shell = pkgs.zsh;
-
-    # Should be generated manually. See option documentation
-    # for tips on generating it. For security purposes, it's
-    # a good idea to use a non-default hash.
-    initialHashedPassword = "$2b$05$NI5/uV4JXUt/wq8hEN.NX.5rKCvCtj8JZih/seVcPIXNFIpw61v.y";
-    openssh.authorizedKeys.keys = [keys.czichy];
+{...}: {
+  config.modules.system.users.usersSettings."czichy" = {
+    isSudoer = true;
+    isNixTrusted = true;
+    uid = 1000;
+    gid = 1000;
+    agenixPassword.enable = true;
     extraGroups = [
-      "wheel"
-      "systemd-journal"
-      "audio"
       "video"
-      "input"
-      "plugdev"
-      "lp"
-      "tss"
-      "power"
-      "nix"
-      "network"
+      "audio"
       "networkmanager"
-      "wireshark"
-      "mysql"
+      "input"
+      # ]
+      # ++ ifTheyExist [
+      "camera"
+      "deluge"
       "docker"
-      "podman"
       "git"
+      "i2c"
+      "kvm"
+      "libvirt"
       "libvirtd"
+      "network"
+      "nitrokey"
+      "podman"
+      "qemu-libvirtd"
+      "wireshark"
+      "flatpak"
     ];
   };
 }

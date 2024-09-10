@@ -6,7 +6,7 @@ in {
     (mkRenamedOptionModule ["modules" "device" "yubikeySupport"] ["modules" "system" "yubikeySupport"])
 
     # renamed modules for the userEnv module
-    (mkRenamedOptionModule ["modules" "usrEnv" "autologin"] ["modules" "system" "autoLogin"])
+    # (mkRenamedOptionModule ["modules" "usrEnv" "autologin"] ["modules" "system" "autoLogin"])
     (mkRenamedOptionModule ["modules" "usrEnv" "isWayland"] ["meta" "isWayland"])
 
     # renamed options for the system module

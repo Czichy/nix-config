@@ -3,22 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-with builtins;
-with lib; let
-  inherit
-    (lib)
-    isModuleLoadedAndEnabled
-    ;
-  sys = modules.system;
-
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled osConfig "modules.system.impermanence") && sys.impermanence.home.enable;
-  impermanence =
-    if impermanenceCheck
-    then sys.impermanence
-    else {};
-
+}: let
   browser = ["firefox.desktop"];
   mailer = ["thunderbird.desktop"];
   zathura = ["zathura.desktop"];
@@ -95,53 +80,4 @@ in {
       defaultApplications = associations;
     };
   };
-  config = mkMerge [
-    # |----------------------------------------------------------------------| #
-    {
-      home.sessionVariables = {
-        # Default programs
-        EDITOR = "hx";
-        VISUAL = "hx";
-        # Directory structure
-        DOWNLOADS_DIR = config.home.homeDirectory + "/Downloads";
-        ORG_DIR = config.home.homeDirectory + "/OrgBundle";
-        PROJECTS_DIR = config.home.homeDirectory + "/projects";
-        TRADING_DIR = config.home.homeDirectory + "/Trading";
-        DOCUMENTS_DIR = config.home.homeDirectory + "/Dokumente";
-        SECRETS_DIR = config.home.homeDirectory + "/.credentials";
-      };
-
-      # home.file = {
-      #"${config.xdg.configHome}/.blank".text = mkBefore "";
-      #"${config.xdg.cacheHome}/.blank".text = mkBefore "";
-      #"${config.xdg.dataHome}/.blank".text = mkBefore "";
-      #"${config.xdg.stateHome}/.blank".text = mkBefore "";
-      #"${config.home.sessionVariables.DOWNLOADS_DIR}/.blank".text = mkIf (
-      #  config.home.sessionVariables.DOWNLOADS_DIR != null
-      #) (mkBefore "");
-      #"${config.home.sessionVariables.ORG_DIR}/.blank".text = mkIf (
-      #  config.home.sessionVariables.ORG_DIR != null
-      #) (mkBefore "");
-      #"${config.home.sessionVariables.PROJECTS_DIR}/.blank".text = mkIf (
-      #  config.home.sessionVariables.PROJECTS_DIR != null
-      #) (mkBefore "");
-      #"${config.home.sessionVariables.TRADING_DIR}/.blank".text = mkIf (
-      #  config.home.sessionVariables.TRADING_DIR != null
-      #) (mkBefore "");
-      # };
-    }
-    # |----------------------------------------------------------------------| #
-    (mkIf impermanenceCheck {
-      home.persistence."${impermanence.persistentRoot}${config.home.homeDirectory}" = {
-        directories = [
-          ".ssh"
-          (pathToRelative config.home.sessionVariables.PROJECTS_DIR)
-          (pathToRelative config.home.sessionVariables.TRADING_DIR)
-          (pathToRelative config.home.sessionVariables.DOCUMENTS_DIR)
-          (pathToRelative config.home.sessionVariables.SECRETS_DIR)
-        ];
-      };
-    })
-    # |----------------------------------------------------------------------| #
-  ];
 }

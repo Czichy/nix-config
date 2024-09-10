@@ -7,6 +7,7 @@ with lib; let
     ;
 in {
   imports = [
+    ./ib-tws.nix
     ./gaming.nix
     ./shells/nushell.nix
   ];

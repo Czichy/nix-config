@@ -1,5 +1,6 @@
 {
   inputs,
+  inputs',
   osConfig,
   config,
   pkgs,
@@ -75,7 +76,7 @@ in {
           bookmarks = {};
           extensions =
             # with addons;
-            with inputs.firefox-addons.packages.${pkgs.system};
+            with inputs'.firefox-addons.packages;
             # with pkgs.nur.repos.rycee.firefox-addons;
               [
                 # Rycee NUR: https://nur.nix-community.org/repos/rycee/
@@ -213,7 +214,7 @@ in {
           bookmarks = {};
           extensions =
             # with addons;
-            with inputs.firefox-addons.packages.${pkgs.system};
+            with inputs'.firefox-addons.packages;
             #  with pkgs.nur.repos.rycee.firefox-addons;
               [
                 # Rycee NUR: https://nur.nix-community.org/repos/rycee/

@@ -1,7 +1,7 @@
 {
   imports = [
     ./brightnessd.nix
-    ./oomd.nix
+    # ./oomd.nix
     ./timesyncd.nix
   ];
 }
