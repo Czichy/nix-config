@@ -147,7 +147,8 @@ in {
 
         keysSecretsAttrsetKey = mkOption {
           type = str;
-          default = "hosts.${config.networking.hostName}.users.${_user}.authorizedKeys";
+          default = "${_user}";
+          # default = "hosts.${config.networking.hostName}.users.${_user}.authorizedKeys";
           description = ''
             TODO
           '';
@@ -156,12 +157,13 @@ in {
     });
   };
 
-  config = {
-    assertions = [
-      {
-        assertion = cfg.useHomeManager -> sys.users.mainUser != null;
-        message = "modules.system.mainUser must be set while modules.usrEnv.useHomeManager is enabled";
-      }
-    ];
-  };
+  # TODO ensure one or none isMainUser
+  # config = {
+  #   assertions = [
+  #     {
+  #       assertion = cfg.useHomeManager -> sys.users.mainUser != null;
+  #       message = "modules.system.mainUser must be set while modules.usrEnv.useHomeManager is enabled";
+  #     }
+  #   ];
+  # };
 }

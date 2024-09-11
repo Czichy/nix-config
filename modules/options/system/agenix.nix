@@ -1,9 +1,12 @@
 {
+  config,
   lib,
   inputs,
   ...
 }: let
   inherit (lib) mkEnableOption mkOption;
+
+  cfg = config.modules.system.agenix;
 in {
   options.modules.system.agenix = with lib.types; {
     enable = mkOption {

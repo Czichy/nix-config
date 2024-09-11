@@ -40,6 +40,8 @@
       # the internet.
       aliases = callLibs ./aliases.nix;
 
+      attrsets = callLibs ./attrsets.nix;
+
       # System builders and similar functions. Generally, those are abstractions around functions
       # found in nixpkgs, such as nixosSystem or evalModules, that simplify host creation.
       builders = callLibs ./builders.nix;
@@ -128,6 +130,7 @@
 
     # Get individual functions from the parent attributes
     inherit (self.extendedLib.aliases) sslTemplate common;
+    inherit (self.extendedLib.attrsets) mapFilterAttrs mergeAttrs mapToAttrsAndMerge flatten groupAttrsetBySublistElems nestedHasAttr;
     inherit (self.extendedLib.builders) mkSystem mkNixosSystem mkNixosIso mkSDImage mkRaspi4Image;
     inherit (self.extendedLib.ci) mkGithubMatrix;
     inherit (self.extendedLib.dag) entryBefore entryBetween entryAfter entryAnywhere topoSort dagOf;

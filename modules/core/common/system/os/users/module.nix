@@ -1,6 +1,8 @@
 {
   config,
   lib,
+  pkgs,
+  pubkeys,
   ...
 }:
 with builtins;
@@ -16,7 +18,8 @@ with lib; let
   cfg = sys.users;
   _ = mkOverrideAtModuleLevel;
 
-  agenixCheck = (isModuleLoadedAndEnabled config "modules.security.agenix") && cfg.agenix.enable;
+  # agenixCheck = (isModuleLoadedAndEnabled config "modules.security.agenix") && sys.agenix.enable;
+  agenixCheck = sys.agenix.enable;
 in {
   imports = [
     # ../../../hosts/config/users.nix

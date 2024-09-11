@@ -19,6 +19,7 @@
       };
     };
 
+    users.enable = true;
     # containers = {
     # enabledContainers = ["alpha"];
     # };

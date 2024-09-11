@@ -10,7 +10,7 @@
   #  1. My public keys are more easily obtainable from outside
   #  2. It's easy to share key names and values internally especially
   #  for setting them for users, services, etc.
-  publicKeys = import ./keys.nix;
+  publicKeys = import ./pubkeys.nix;
 in {
   perSystem = {
     config,
@@ -36,7 +36,7 @@ in {
       # parts of the module system to refer to them in a more concise
       # way than importing them directly.
       pins = pinnedSources;
-      keys = publicKeys;
+      pubkeys = publicKeys;
 
       # Unify all instances of nixpkgs into a single `pkgs` set
       # Wthat includes our own overlays within `perSystem`. This
@@ -49,6 +49,6 @@ in {
 
   flake = {
     pins = pinnedSources;
-    keys = publicKeys;
+    pubkeys = publicKeys;
   };
 }
