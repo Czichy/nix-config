@@ -11,6 +11,9 @@
   #  2. It's easy to share key names and values internally especially
   #  for setting them for users, services, etc.
   publicKeys = import ./pubkeys.nix;
+
+  globals = import ./globals
+
 in {
   perSystem = {
     config,
@@ -50,5 +53,6 @@ in {
   flake = {
     pins = pinnedSources;
     pubkeys = publicKeys;
+    globals = globals;
   };
 }
