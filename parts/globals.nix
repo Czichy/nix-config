@@ -17,8 +17,8 @@
           inherit inputs;
         };
         modules = [
-          ../../modules/options/globals/module.nix
-          ../../globals.nix
+          ../modules/options/globals/module.nix
+          ../globals.nix
           ({lib, ...}: {
             globals = lib.mkMerge (
               lib.concatLists (lib.flip lib.mapAttrsToList config.nodes (
