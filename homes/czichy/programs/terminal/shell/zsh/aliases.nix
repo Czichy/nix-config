@@ -28,7 +28,7 @@ in {
     build = "nix build $@ --builders \"\"";
 
     # quality of life aliases
-    cat = "${getExe bat} --style=plain";
+    cat = "${getExe bat} -p --wrap=never --paging=never";
     grep = "${getExe ripgrep}";
     du = "${getExe dust}";
     ps = "${getExe procs}";

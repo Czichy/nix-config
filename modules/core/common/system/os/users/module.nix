@@ -24,7 +24,7 @@ in {
   imports = [
     # ../../../hosts/config/users.nix
     ./czichy.nix
-    ./builder.nix
+    # ./builder.nix
     ./root.nix
   ];
   config = mkIf cfg.enable (mkMerge [
@@ -86,7 +86,7 @@ in {
         in
           with userCfg.agenixPassword; {
             "${passwordSecretsPath}" = mkIf enable {
-              file = _ (secretsPath + "/${passwordSecretsPath}.age");
+              file = _ (sys.agenix.root.secretsPath + "/${passwordSecretsPath}.age");
               mode = _ "700";
               owner = _ _user;
             };

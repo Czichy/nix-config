@@ -22,7 +22,7 @@
       )
 
       data = json.loads(output.stdout)
-      configurations = data.get("nixosConfigurations", {}).keys()
+      configurations = data.get("nixosConfigurations", {}).pubkeys()
 
       for configuration in configurations:
           subprocess.run(["${pkgs.nixos-rebuild}/bin/nixos-rebuild", "build", "--flake", f".#{configuration}"])

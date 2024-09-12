@@ -38,7 +38,7 @@ in {
   services.greetd = {
     enable = true;
     vt = 2;
-    restart = !sys.autoLogin;
+    restart = true; #!sys.autoLogin;
 
     # <https://man.sr.ht/~kennylevinsen/greetd/>
     settings = {
@@ -47,7 +47,7 @@ in {
       default_session = defaultSession;
 
       # initial session
-      initial_session = mkIf sys.autoLogin initialSession;
+      # initial_session = mkIf sys.autoLogin initialSession;
     };
   };
 

@@ -17,9 +17,9 @@ in {
     };
 
     # benchmarking tools
-    environment.systemPackages = with pkgs; [
-      glxinfo
-      glmark2
-    ];
+    # environment.systemPackages = with pkgs; [
+    #   glxinfo
+    #   glmark2
+    # ];
   };
 }

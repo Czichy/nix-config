@@ -8,6 +8,8 @@
 with builtins;
 with lib; let
   inherit (osConfig) modules;
+  inherit (lib.meta) getExe getExe';
+  inherit (pkgs) eza bat ripgrep dust procs yt-dlp python3 netcat-gnu;
   inherit
     (lib)
     mkOverrideAtHmModuleLevel
@@ -148,13 +150,13 @@ in {
       home.shellAliases = mkMerge [
         {fetch = _ "${pkgs.nitch}/bin/nitch";}
         (mkIf cfg.shellAliases.lsToEza {
-          ls = _ "${pkgs.eza}/bin/eza";
-          ll = _ "${pkgs.eza}/bin/eza -F --hyperlink --icons --group-directories-first -la --git --header --created --modified";
-          tree = _ "${pkgs.eza}/bin/eza -F --hyperlink --icons --group-directories-first -la --git --header --created --modified -T";
+          ls = _ "${getExe eza} -h --git --icons --color=auto --group-directories-first -s extension";
+          ll = _ "${getExe eza}/bin/eza -F --hyperlink --icons --group-directories-first -la --git --header --created --modified";
+          tree = _ "${getExe eza}/bin/eza -F --hyperlink --icons --group-directories-first -la --git --header --created --modified -T";
         })
         (mkIf cfg.shellAliases.catToBat {
-          cat = _ "${pkgs.bat}/bin/bat -p --wrap=never --paging=never";
-          less = _ "${pkgs.bat}/bin/bat --paging=always";
+          cat = _ "${getExe bat}/bin/bat -p --wrap=never --paging=never";
+          less = _ "${getExe bat}/bin/bat --paging=always";
         })
         (mkIf cfg.shellAliases.findToFd {
           find = _ "${pkgs.fd}/bin/fd";
@@ -170,7 +172,7 @@ in {
     (mkIf cfg.shellAliases.catToBat {
       programs.bat = {
         enable = _ true;
-        config.theme = "base16";
+        # config.theme = "base16";
       };
     })
     # |----------------------------------------------------------------------| #

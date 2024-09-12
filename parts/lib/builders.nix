@@ -42,7 +42,7 @@
       mkSystem {
         # specialArgs
         specialArgs = recursiveUpdate {
-          inherit (self) keys nodes globals;
+          inherit (self) pubkeys nodes globals;
           inherit lib modulesPath;
           inherit inputs self inputs' self';
         } (args.specialArgs or {});

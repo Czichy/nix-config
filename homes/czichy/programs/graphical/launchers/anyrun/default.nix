@@ -101,10 +101,10 @@ in {
 
         "nixos-options.ron".text = let
           nixos-options = osConfig.system.build.manual.optionsJSON + "/share/doc/nixos/options.json";
-          nvf-options = inputs'.nvf.packages.docs-json + "/share/doc/nvf/options.json";
+          # nvf-options = inputs'.nvf.packages.docs-json + "/share/doc/nvf/options.json";
           options = builtins.toJSON {
             ":nix" = [nixos-options];
-            ":vim" = [nvf-options];
+            # ":vim" = [nvf-options];
           };
         in ''
           Config(

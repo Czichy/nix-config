@@ -163,7 +163,7 @@ in {
       };
     })
     # |----------------------------------------------------------------------| #
-    (mkIf cfg.allowOther {programs.fuse.userAllowOther = true;})
+    (mkIf cfg.root.allowOther {programs.fuse.userAllowOther = true;})
     # |----------------------------------------------------------------------| #
     (mkIf agenixCheck {
       age.identityPaths = ["${cfg.persistentRoot}/etc/ssh/ssh_host_ed25519_key"];

@@ -38,7 +38,7 @@
       tarpit.enable = true;
       nftables.enable = true;
       tailscale = {
-        enable = true;
+        enable = false;
         isServer = true;
         isClient = false;
       };

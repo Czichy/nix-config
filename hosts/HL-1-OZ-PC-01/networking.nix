@@ -83,36 +83,25 @@
       };
 
       # wired interfaces e.g. ethernet
-      "30-network-defaults-wired" = {
+      "20-enp30s0-untagged" = {
         # matchConfig.Name = "en* | eth* | usb*";
         matchConfig.Type = "ether";
-        networkConfig = {
-          DHCP = "yes";
-          IPv6AcceptRA = true;
-          IPForward = "yes";
-          IPMasquerade = "no";
-        };
+        address = [
+          # globals.net.home-wan.hosts.HL-1-OZ-PC-01.cidrv4
+          # globals.net.vlan10.hosts.HL-1-OZ-PC-01.cidrv4
+          # globals.net.vlan40.hosts.HL-1-OZ-PC-01.cidrv4
+          # globals.net.vlan100.hosts.HL-1-OZ-PC-01.cidrv4
+          "192.168.0.62/24"
+          "192.168.1.62/24"
+          "10.15.1.62/24"
+        ];
+        routes = [{Gateway = "10.15.1.99";}];
         # tag vlan on this link
         vlan = [
           "trust"
           "servers"
           "mgmt"
         ];
-
-        dhcpV4Config = {
-          ClientIdentifier = "duid"; # "mac"
-          Use6RD = "yes";
-          RouteMetric = 512; # should be higher than the wireless RouteMetric so that wireless is preferred
-          UseDNS = false;
-          DUIDType = "link-layer";
-        };
-
-        dhcpV6Config = {
-          RouteMetric = 512;
-          PrefixDelegationHint = "::64";
-          UseDNS = false;
-          DUIDType = "link-layer";
-        };
       };
 
       "30-trust" = {

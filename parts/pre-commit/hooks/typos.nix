@@ -27,7 +27,7 @@
       ignoredFiles = [
         "CHANGELOG.md"
         "source.json"
-        "keys.nix"
+        "pubkeys.nix"
         "autocmds.lua"
       ];
 

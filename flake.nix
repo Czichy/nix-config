@@ -2,8 +2,18 @@
   # https://github.com/czichy/nix-config
   description = "My monorepo for everything NixOS";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs @ {
+    flake-parts,
+    nixpkgs,
+    ...
+  }: let
+    inherit (inputs) nixpkgs;
+    lib = import ./parts/lib {inherit inputs;} // nixpkgs.lib;
+  in
+    inputs.flake-parts.lib.mkFlake {
+      inherit inputs;
+      specialArgs = {inherit lib;};
+    } {
       # Systems for which attributes of perSystem will be built. As
       # a rule of thumb, only systems provided by available hosts
       # should go in this list. More systems will increase evaluation

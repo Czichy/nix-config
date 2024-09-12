@@ -75,11 +75,6 @@ in {
                     mountpoint = "/shared";
                     mountOptions = ["compress=zstd"];
                   };
-                  log = {
-                    type = "filesystem";
-                    mountpoint = "/var/log";
-                    mountOptions = ["compress=zstd"];
-                  };
                 };
               };
             };

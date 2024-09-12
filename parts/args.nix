@@ -11,9 +11,7 @@
   #  2. It's easy to share key names and values internally especially
   #  for setting them for users, services, etc.
   publicKeys = import ./pubkeys.nix;
-
-  globals = import ./globals
-
+  # globals = import ./globals/globals.nix;
 in {
   perSystem = {
     config,
@@ -40,6 +38,7 @@ in {
       # way than importing them directly.
       pins = pinnedSources;
       pubkeys = publicKeys;
+      # globals = globals;
 
       # Unify all instances of nixpkgs into a single `pkgs` set
       # Wthat includes our own overlays within `perSystem`. This
@@ -53,6 +52,6 @@ in {
   flake = {
     pins = pinnedSources;
     pubkeys = publicKeys;
-    globals = globals;
+    # globals = globals;
   };
 }

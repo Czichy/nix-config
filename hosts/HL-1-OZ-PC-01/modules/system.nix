@@ -42,7 +42,7 @@
       optimizeTcp = true;
       nftables.enable = true;
       tailscale = {
-        enable = true;
+        enable = false;
         isClient = true;
         isServer = false;
       };

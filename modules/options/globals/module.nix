@@ -3,6 +3,7 @@
   options,
   ...
 }: let
+  # inherit lib;
   inherit
     (lib)
     mkOption
@@ -25,13 +26,13 @@ in {
             type = types.attrsOf (types.submodule (netSubmod: {
               options = {
                 cidrv4 = mkOption {
-                  type = types.nullOr lib.tensorfiles.types.net.cidrv4;
+                  type = types.nullOr lib.net.types.cidrv4;
                   description = "The CIDRv4 of this network";
                   default = null;
                 };
 
                 cidrv6 = mkOption {
-                  type = types.nullOr lib.tensorfiles.types.net.cidrv6;
+                  type = types.nullOr lib.net.types.cidrv6;
                   description = "The CIDRv6 of this network";
                   default = null;
                 };
@@ -45,23 +46,23 @@ in {
                       };
 
                       ipv4 = mkOption {
-                        type = types.nullOr lib.tensorfiles.types.net.ipv4;
+                        type = types.nullOr lib.net.types.ipv4;
                         description = "The IPv4 of this host";
                         readOnly = true;
                         default =
                           if netSubmod.config.cidrv4 == null
                           then null
-                          else lib.tensorfiles.net.cidr.host hostSubmod.config.id netSubmod.config.cidrv4;
+                          else lib.net.cidr.host hostSubmod.config.id netSubmod.config.cidrv4;
                       };
 
                       ipv6 = mkOption {
-                        type = types.nullOr lib.tensorfiles.types.net.ipv6;
+                        type = types.nullOr lib.net.types.ipv6;
                         description = "The IPv6 of this host";
                         readOnly = true;
                         default =
                           if netSubmod.config.cidrv6 == null
                           then null
-                          else lib.tensorfiles.net.cidr.host hostSubmod.config.id netSubmod.config.cidrv6;
+                          else lib.net.cidr.host hostSubmod.config.id netSubmod.config.cidrv6;
                       };
 
                       cidrv4 = mkOption {
@@ -71,7 +72,7 @@ in {
                         default =
                           if netSubmod.config.cidrv4 == null
                           then null
-                          else lib.tensorfiles.net.cidr.hostCidr hostSubmod.config.id netSubmod.config.cidrv4;
+                          else lib.net.cidr.hostCidr hostSubmod.config.id netSubmod.config.cidrv4;
                       };
 
                       cidrv6 = mkOption {
@@ -81,7 +82,7 @@ in {
                         default =
                           if netSubmod.config.cidrv6 == null
                           then null
-                          else lib.tensorfiles.net.cidr.hostCidr hostSubmod.config.id netSubmod.config.cidrv6;
+                          else lib.net.cidr.hostCidr hostSubmod.config.id netSubmod.config.cidrv6;
                       };
                     };
                   }));
