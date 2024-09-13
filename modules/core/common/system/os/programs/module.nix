@@ -4,7 +4,7 @@
     ./direnv.nix
     ./git.nix
     ./nano.nix
-    ./zsh.nix
+    # ./zsh.nix
   ];
 
   programs = {

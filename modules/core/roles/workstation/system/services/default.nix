@@ -3,7 +3,7 @@
     ./adb.nix
     ./dbus.nix
     ./earlyoom.nix
-    ./gnome.nix
+    # ./gnome.nix
     ./location.nix
     ./printing.nix
     ./misc.nix

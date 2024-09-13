@@ -21,7 +21,7 @@ in {
       enableScDaemon = true;
       enableSshSupport = true;
       enableExtraSocket = true;
-      enableZshIntegration = true;
+      enableNushellIntegration = true;
 
       pinentryPackage = pinentryPkg;
 

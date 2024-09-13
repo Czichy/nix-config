@@ -2,7 +2,7 @@
   # While we do have zsh enabled in userspace (i.e. home-manager) we also
   # need it set system-wide since zsh will be our login shell.
   programs.zsh = {
-    enable = true;
+    enable = false;
 
     shellInit = ''
       # Make sure we always use the correct zsh dotdir.

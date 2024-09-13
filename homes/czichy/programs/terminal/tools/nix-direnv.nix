@@ -31,6 +31,12 @@
     '';
 
     # we should probably do this ourselves
-    enableZshIntegration = true;
+    enableNushellIntegration = true;
+    # enableBashIntegration = _ (isModuleLoadedAndEnabled config "tensorfiles.hm.programs.shells.bash");
+    # enableFishIntegration = _ (isModuleLoadedAndEnabled config "tensorfiles.hm.programs.shells.fish");
+    # enableNushellIntegration = _ (
+    #   isModuleLoadedAndEnabled config "tensorfiles.hm.programs.shells.nushell"
+    # );
+    # enableZshIntegration = _ (isModuleLoadedAndEnabled config "tensorfiles.hm.programs.shells.zsh");
   };
 }

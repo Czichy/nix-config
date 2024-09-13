@@ -74,10 +74,10 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # Nix wrapper for building and testing my system
-    nh = {
-      url = "github:viperML/nh";
-      inputs.nixpkgs.follows = "nixpkgs-small";
-    };
+    # nh = {
+    #   url = "github:viperML/nh";
+    #   inputs.nixpkgs.follows = "nixpkgs-small";
+    # };
 
     # multi-profile Nix-flake deploy
     deploy-rs = {

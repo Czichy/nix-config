@@ -3,7 +3,7 @@
     inputs.disko.nixosModules.disko
     ./disko.nix
 
-    ./kernel
+    # ./kernel
     ./modules
     # ./btrfs.nix
     ./networking.nix

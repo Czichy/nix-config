@@ -8,7 +8,7 @@
   };
 
   environment = {
-    shells = with pkgs; [bash zsh];
+    shells = with pkgs; [bash];
     systemPackages = with pkgs; [
       vim
       git

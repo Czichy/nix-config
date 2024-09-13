@@ -27,7 +27,7 @@ in {
           locked-title = "no";
           term = "xterm-256color";
           pad = "16x16 center";
-          shell = "zsh";
+          shell = "nu";
 
           # notifications
           notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";

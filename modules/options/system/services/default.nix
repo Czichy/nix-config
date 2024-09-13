@@ -9,6 +9,7 @@ in {
     ./monitoring.nix
     ./networking.nix
     ./social.nix
+    ./syncthing.nix
   ];
 
   options.modules.system = {

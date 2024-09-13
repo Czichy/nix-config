@@ -47,7 +47,7 @@ in {
     ];
   in {
     # Lix, the higher performance Nix fork.
-    package = pkgs.lix;
+    # package = pkgs.lix;
 
     # Pin the registry to avoid downloading and evaluating
     # a new nixpkgs version on each command causing a re-eval.
@@ -209,8 +209,8 @@ in {
         "https://hyprland.cachix.org" # hyprland
         "https://nixpkgs-unfree.cachix.org" # unfree-package cache
         "https://anyrun.cachix.org" # anyrun program launcher
-        "https://nyx.cachix.org" # cached stuff from my flake outputs
-        "https://neovim-flake.cachix.org" # a cache for my neovim flake
+        # "https://nyx.cachix.org" # cached stuff from my flake outputs
+        # "https://neovim-flake.cachix.org" # a cache for my neovim flake
         "https://cache.garnix.io" # garnix binary cache, hosts prismlauncher
         "https://cache.czichy.dev" # my own binary cache, served over https
         "https://ags.cachix.org" # ags
@@ -224,8 +224,8 @@ in {
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
         "czichy.cachix.org-1:VTTBFNQWbfyLuRzgm2I7AWSDJdqAa11ytLXHBhrprZk="
-        "neovim-flake.cachix.org-1:iyQ6lHFhnB5UkVpxhQqLJbneWBTzM8LBYOFPLNH4qZw="
-        "nyx.cachix.org-1:xH6G0MO9PrpeGe7mHBtj1WbNzmnXr7jId2mCiq6hipE="
+        # "neovim-flake.cachix.org-1:iyQ6lHFhnB5UkVpxhQqLJbneWBTzM8LBYOFPLNH4qZw="
+        # "nyx.cachix.org-1:xH6G0MO9PrpeGe7mHBtj1WbNzmnXr7jId2mCiq6hipE="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "cache.czichy.dev-1:DhlmJBtURj+XS3j4F8SFFukT8dYgSjtFcd3egH8rE6U="
         "ags.cachix.org-1:naAvMrz0CuYqeyGNyLgE010iUiuf/qx6kYrUv3NwAJ8="

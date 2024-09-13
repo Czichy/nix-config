@@ -3,16 +3,17 @@
     # ./chromium
     # ./discord
     # ./element
-    ./librewolf
-    ./firefox
-    ./obs
-    ./office
     # ./schizofox
     # ./spotify
     # ./thunderbird
-    ./ib-tws
-    ./vscode
     # ./webcord
+    ./firefox
+    ./ib-tws
+    ./keepassxc
+    ./librewolf
+    ./obs
+    ./office
+    ./vscode
     ./zathura
   ];
 }

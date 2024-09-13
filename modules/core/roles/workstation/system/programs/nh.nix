@@ -4,7 +4,8 @@
   environment.variables.FLAKE = "/home/czichy/.config/nyx";
 
   programs.nh = {
-    enable = true;
+    # enable = true;
+    enable = false;
     package = pkgs.nh;
 
     # path to the system flake

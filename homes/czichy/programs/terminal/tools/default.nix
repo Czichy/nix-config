@@ -3,9 +3,9 @@
     ./bin
     ./fastfetch
     ./git
-    ./neomutt
-    ./newsboat
-    ./vifm
+    # ./neomutt
+    # ./newsboat
+    # ./vifm
     ./xplr
     ./yazi
     ./zellij
@@ -18,15 +18,15 @@
     ./fzf.nix
     ./gh.nix
     ./gpg.nix
-    ./man.nix
+    # ./man.nix
     ./nix-direnv.nix
-    ./nix-index.nix
-    ./nix-init.nix
-    ./ranger.nix
+    # ./nix-index.nix
+    # ./nix-init.nix
+    # ./ranger.nix
     ./ripgrep.nix
     ./ssh.nix
     ./tealdeer.nix
-    ./thefuck.nix
+    # ./thefuck.nix
     ./transient-services.nix
     ./zoxide.nix
   ];

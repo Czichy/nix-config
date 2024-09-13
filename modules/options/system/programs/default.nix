@@ -17,20 +17,26 @@ in {
     cli.enable = mkEnableOption "CLI package sets" // {default = true;};
     dev.enable = mkEnableOption "development related package sets";
 
-    libreoffice.enable = mkEnableOption "LibreOffice suite";
     discord.enable = mkEnableOption "Discord messenger";
     element.enable = mkEnableOption "Element Matrix client";
+    kdeconnect.enable = mkEnableOption "KDE Connect utility";
+    keepassxc = {
+      enable = mkEnableOption "KeepassXC";
+      impermanence = {
+        enable = mkImpermanenceEnableOption;
+      };
+    };
+    libreoffice.enable = mkEnableOption "LibreOffice suite";
+    nextcloud.enable = mkEnableOption "Nextcloud sync client";
+    noisetorch.enable = mkEnableOption "NoiseTorch noise suppression plugin";
     obs.enable = mkEnableOption "OBS Studio";
+    rnnoise.enable = mkEnableOption "RNNoise noise suppression plugin";
     spotify.enable = mkEnableOption "Spotify music player";
+    steam.enable = mkEnableOption "Steam game client";
     thunderbird.enable = mkEnableOption "Thunderbird mail client";
     vscode.enable = mkEnableOption "Visual Studio Code";
-    steam.enable = mkEnableOption "Steam game client";
-    kdeconnect.enable = mkEnableOption "KDE Connect utility";
     webcord.enable = mkEnableOption "Webcord Discord client";
     zathura.enable = mkEnableOption "Zathura document viewer";
-    nextcloud.enable = mkEnableOption "Nextcloud sync client";
-    rnnoise.enable = mkEnableOption "RNNoise noise suppression plugin";
-    noisetorch.enable = mkEnableOption "NoiseTorch noise suppression plugin";
 
     chromium = {
       enable = mkEnableOption "Chromium browser";

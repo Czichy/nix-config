@@ -60,22 +60,22 @@ in {
 
       # Patch the everliving shit out of ZSH to remove some of my personal annoyances
       # such as newuser install
-      zsh = prev.zsh.overrideAttrs (old: {
-        patches = [
-          ./patches/0002-zsh-globquote.patch
+      # zsh = prev.zsh.overrideAttrs (old: {
+      #   patches = [
+      #     ./patches/0002-zsh-globquote.patch
 
-          # From:
-          #  <https://github.com/fugidev/nix-config>
-          ./patches/0002-zsh-completion-remote-files.patch
-        ];
+      #     # From:
+      #     #  <https://github.com/fugidev/nix-config>
+      #     ./patches/0002-zsh-completion-remote-files.patch
+      #   ];
 
-        configureFlags = (old.configureFlags or []) ++ ["--disable-site-fndir" "--without-tcsetpgrp"];
-        postConfigure =
-          (old.postConfigure or "")
-          + ''
-            sed -i -e '/^name=zsh\/newuser/d' config.modules
-          '';
-      });
+      #   configureFlags = (old.configureFlags or []) ++ ["--disable-site-fndir" "--without-tcsetpgrp"];
+      #   postConfigure =
+      #     (old.postConfigure or "")
+      #     + ''
+      #       sed -i -e '/^name=zsh\/newuser/d' config.modules
+      #     '';
+      # });
 
       # Create an overlay for nix-output-monitor to match the inconsistent
       # and frankly ugly icons with Nerdfonts ones. they look a little larger
