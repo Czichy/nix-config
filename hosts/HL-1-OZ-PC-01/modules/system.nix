@@ -1,6 +1,12 @@
 {pkgs, ...}: {
   config.modules.system = {
     fs.enabledFilesystems = ["btrfs" "vfat" "ntfs" "exfat"];
+
+    agenix = {
+      root.enable = true;
+      home.enable = true;
+    };
+
     impermanence = {
       root.enable = true;
       home.enable = true;
@@ -47,8 +53,6 @@
         isServer = false;
       };
     };
-    agenix.root.enable = true;
-    agenix.home.enable = true;
 
     security = {
       tor.enable = true;

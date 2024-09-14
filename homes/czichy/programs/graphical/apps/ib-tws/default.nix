@@ -12,16 +12,15 @@ with lib; let
   inherit
     (lib)
     mkOverrideAtHmModuleLevel
-    isModuleLoadedAndEnabled
     ;
 
   sys = modules.system;
   prg = sys.programs;
   cfg = prg.ib-tws;
 
-  passwordSecretsPath = "hosts/${osConfig.meta.hostname}/users/${config.home.username}/ibkr/password";
+  passwordSecretsPath = "/ibkr/password";
 
-  userSecretsPath = "hosts/${osConfig.meta.hostname}/users/${config.home.username}/ibkr/user";
+  userSecretsPath = "/ibkr/user";
 
   _ = mkOverrideAtHmModuleLevel;
 
@@ -31,8 +30,7 @@ with lib; let
     then sys.impermanence
     else {};
 
-  agenixCheck =
-    (isModuleLoadedAndEnabled config "security.agenix") && cfg.agenix.enable;
+  agenixCheck = cfg.agenix.enable;
 in {
   config = mkIf cfg.enable (mkMerge [
     # |----------------------------------------------------------------------| #

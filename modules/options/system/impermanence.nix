@@ -184,7 +184,7 @@ in {
 
       allowOther = mkOption {
         type = types.bool;
-        default = false;
+        default = true;
         description = ''
           TODO
         '';
