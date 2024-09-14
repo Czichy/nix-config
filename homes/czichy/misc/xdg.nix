@@ -40,7 +40,13 @@
 
   template = import lib.xdgTemplate "home-manager";
 in {
-  #home.sessionVariables = template.sysEnv;
+  home.sessionVariables = {
+    # Default programs
+    BROWSER = "firefox";
+    EXPLORER = "yazi";
+    TERMINAL = "foot";
+    EDITOR = "hx";
+  };
   xdg = {
     enable = true;
     cacheHome = "${config.home.homeDirectory}/.cache";

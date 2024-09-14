@@ -1,6 +1,8 @@
 {
   osConfig,
+  config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -14,16 +16,14 @@ with lib; let
   agenixCheck = sys.agenix.home.enable;
 
   ibkr = {
-    user = osConfig.age.secrets."${modules.system.programs.ib-tws.userSecretsPath}".path;
-    password = osConfig.age.secrets."${modules.syste.programs.ib-tws.passwordSecretsPath}".path;
+    user = config.age.secrets."${modules.system.programs.ib-tws.userSecretsPath}".path;
+    password = config.age.secrets."${modules.system.programs.ib-tws.passwordSecretsPath}".path;
   };
 in {
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       # Startup
-      # "swaybg -i ${wallpaper} --mode fill"
       "${pkgs.swaynotificationcenter}/bin/swaync"
-      # "ib-tws-native"
       "[workspace 7] firefox -P 'tradingview1' --class=tradingview"
       "[workspace 6] ${BROWSER}"
       "wl-paste --type text --watch cliphist store #Stores only text data"

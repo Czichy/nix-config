@@ -11,6 +11,7 @@
     hyprshot = pkgs.callPackage ./hyprshot.nix {};
     dbus-hyprland-env = pkgs.callPackage ./dbus-hyprland-env.nix {};
     propaganda = pkgs.callPackage ./propaganda.nix {};
+    swayosd = pkgs.callPackage ./swayosd.nix {};
   };
 in
   packages

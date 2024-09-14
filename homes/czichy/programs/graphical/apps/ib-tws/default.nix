@@ -1,9 +1,8 @@
 {
+  self',
   osConfig,
   config,
   lib,
-  system,
-  inputs,
   ...
 }:
 with builtins;
@@ -18,9 +17,9 @@ with lib; let
   prg = sys.programs;
   cfg = prg.ib-tws;
 
-  passwordSecretsPath = "/ibkr/password";
+  passwordSecretsPath = "ibkr/password";
 
-  userSecretsPath = "/ibkr/user";
+  userSecretsPath = "ibkr/user";
 
   _ = mkOverrideAtHmModuleLevel;
 
@@ -36,8 +35,9 @@ in {
     # |----------------------------------------------------------------------| #
     {
       home.packages = [
-        inputs.self.packages.${system}.ib-tws-native
-        inputs.self.packages.${system}.ib-tws-native-latest
+        self'.packages.ibtws
+        self'.packages.ibtws_latest
+        # pkgs.ib-tws-native-latest
       ];
     }
     # |----------------------------------------------------------------------| #
@@ -47,12 +47,12 @@ in {
         age.secrets = {
           "${userSecretsPath}" = {
             # symlink = true;
-            file = _ (secretsPath + "/${userSecretsPath}.age");
+            file = _ (sys.agenix.home.secretsPath + "/${userSecretsPath}.age");
             mode = _ "0600";
           };
           "${passwordSecretsPath}" = {
             # symlink = true;
-            file = _ (secretsPath + "/${passwordSecretsPath}.age");
+            file = _ (sys.agenix.home.secretsPath + "/${passwordSecretsPath}.age");
             mode = _ "0600";
           };
         };
