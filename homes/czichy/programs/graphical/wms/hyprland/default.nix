@@ -13,7 +13,7 @@
   inherit (osConfig) modules;
 
   inherit (import ./packages {inherit inputs' pkgs;}) grimblast hyprshot dbus-hyprland-env hyprpicker;
-  inherit (config.home.sessionVariables) TERMINAL BROWSER EXPLORER; # EDITO
+  # inherit (config.home.sessionVariables) TERMINAL BROWSER EXPLORER; # EDITO
 
   env = modules.usrEnv;
 in {

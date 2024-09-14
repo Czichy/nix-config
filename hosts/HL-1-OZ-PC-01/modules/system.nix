@@ -57,6 +57,9 @@
       auditd.enable = true;
     };
     services = {
+      flatpak = {
+        enable = true;
+      };
       syncthing = {
         enable = true;
         user = "czichy";
@@ -73,10 +76,7 @@
 
       # git.signingKey = "0xAF26552424E53993 ";
 
-      gaming = {
-        enable = true;
-        minecraft.enable = true;
-      };
+      gaming.enable = true;
 
       default = {
         terminal = "foot";
@@ -90,5 +90,11 @@
 
       libreoffice.enable = true;
     };
+
+    # Minecraft
+    programs.gaming.minecraft.enable = true;
+    services.flatpak.packages = [
+      "io.mrarm.mcpelauncher"
+    ];
   };
 }

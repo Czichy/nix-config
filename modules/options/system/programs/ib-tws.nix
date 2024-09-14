@@ -24,20 +24,20 @@ in {
       enable = mkAgenixEnableOption;
     };
     # # TODO maybe use config using latest and/or stable
-    # passwordSecretsPath = mkOption {
-    #   type = str;
-    #   default = "hosts/${config.meta.hostname}/users/${config.home.username}/ibkr/password";
-    #   description = ''
-    #     TODO
-    #   '';
-    # };
+    passwordSecretsPath = mkOption {
+      type = str;
+      default = "ibkr/password";
+      description = ''
+        TODO
+      '';
+    };
 
-    # userSecretsPath = mkOption {
-    #   type = str;
-    #   default = "hosts/${config.meta.hostname}/users/${config.home.username}/ibkr/user";
-    #   description = ''
-    #     TODO
-    #   '';
-    # };
+    userSecretsPath = mkOption {
+      type = str;
+      default = "ibkr/user";
+      description = ''
+        TODO
+      '';
+    };
   };
 }

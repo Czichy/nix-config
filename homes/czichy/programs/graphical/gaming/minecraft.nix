@@ -3,21 +3,16 @@
   config,
   lib,
   ...
-}: let
+}:
+with lib; let
   inherit (lib.modules) mkIf;
   inherit (osConfig) modules;
-  inherit
-    (lib)
-    mkMerge
-    isModuleLoadedAndEnabled
-    ;
 
   sys = modules.system;
   env = modules.usrEnv;
   prg = env.programs;
 
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled osConfig "modules.system.impermanence") && sys.impermanence.home.enable;
+  impermanenceCheck = sys.impermanence.home.enable;
   impermanence =
     if impermanenceCheck
     then sys.impermanence

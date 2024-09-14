@@ -25,8 +25,7 @@ with lib; let
 
   _ = mkOverrideAtHmModuleLevel;
 
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled osConfig "modules.system.impermanence") && sys.impermanence.home.enable;
+  impermanenceCheck = sys.impermanence.home.enable;
   impermanence =
     if impermanenceCheck
     then sys.impermanence

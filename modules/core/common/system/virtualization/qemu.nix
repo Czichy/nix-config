@@ -5,12 +5,11 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (lib) isModuleLoadedAndEnabled;
 
   sys = config.modules.system;
   cfg = sys.virtualization;
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled config "modules.system.impermanence") && sys.impermanence.root.enable;
+
+  impermanenceCheck = sys.impermanence.root.enable;
   impermanence =
     if impermanenceCheck
     then sys.impermanence

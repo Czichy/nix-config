@@ -29,8 +29,7 @@
 
     microvm.vms.${guestName} = import ./microvm.nix guestName guestCfg attrs;
   };
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled config "modules.system.impermanence") && sys.impermanence.root.enable;
+  impermanenceCheck = sys.impermanence.root.enable;
   impermanence =
     if impermanenceCheck
     then sys.impermanence

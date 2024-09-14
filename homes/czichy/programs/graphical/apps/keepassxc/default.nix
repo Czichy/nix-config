@@ -2,35 +2,29 @@
   osConfig,
   config,
   lib,
+  pkgs,
   ...
 }:
 with builtins;
 with lib; let
   inherit (osConfig) modules;
-  inherit
-    (lib)
-    # mkOverrideAtHmModuleLevel
-    
-    isModuleLoadedAndEnabled
-    ;
 
   sys = modules.system;
   prg = sys.programs;
   cfg = prg.keepassxc;
 
   # _ = mkOverrideAtHmModuleLevel;
+  impermanenceCheck = sys.impermanence.home.enable;
 
-  impermanenceCheck =
-    (isModuleLoadedAndEnabled config "tensorfiles.hm.system.impermanence") && cfg.impermanence.enable;
   impermanence =
     if impermanenceCheck
-    then config.tensorfiles.hm.system.impermanence
+    then sys.impermanence
     else {};
 in {
   config = mkIf cfg.enable (mkMerge [
     # |----------------------------------------------------------------------| #
     {
-      home.packages = [keepassxc];
+      home.packages = [pkgs.keepassxc];
 
       # systemd.user.services.keepassxc = {
       #   Unit = {

@@ -9,15 +9,11 @@ with lib; let
   inherit (config) modules;
   inherit (config.meta) hostname;
 
-  inherit
-    (lib)
-    isModuleLoadedAndEnabled
-    ;
-
   sys = modules.system;
   srv = sys.services;
   cfg = srv.syncthing;
-  agenixCheck = (isModuleLoadedAndEnabled config "modules.security.agenix") && cfg.agenix.enable;
+
+  agenixCheck = sys.agenix.enable;
 
   # TODO: config
   devices = lib.attrsets.filterAttrs (h: _: h != hostname) {

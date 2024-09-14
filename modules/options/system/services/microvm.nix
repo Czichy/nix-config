@@ -1,10 +1,6 @@
 {
   config,
   lib,
-  pkgs,
-  pubkeys,
-  inputs,
-  # utils,
   ...
 } @ attrs: let
   inherit
@@ -14,28 +10,6 @@
     ;
   inherit (lib) mkImpermanenceEnableOption;
   cfg = config.modules.system.services.microvm;
-  # sys = modules.system;
-  # generateMacAddress = s: let
-  #   hash = builtins.hashString "sha256" s;
-  #   c = off: builtins.substring off 2 hash;
-  # in "${builtins.substring 0 1 hash}2:${c 2}:${c 4}:${c 6}:${c 8}:${c 10}";
-  # # List the necessary mount units for the given guest
-  # fsMountUnitsFor = guestCfg: map (x: x.hostMountpoint) (lib.attrValues guestCfg.zfs);
-  # defineMicrovm = guestName: guestCfg: {
-  #   # Ensure that the zfs dataset exists before it is mounted.
-  #   # systemd.services."microvm@${guestName}" = {
-  #   #   unitConfig = {
-  #   #     RequiresMountsFor = fsMountUnitsFor guestCfg;
-  #   #   };
-  #   # };
-  #   microvm.vms.${guestName} = import ./microvm.nix guestName guestCfg attrs;
-  # };
-  # impermanenceCheck =
-  #   (isModuleLoadedAndEnabled config "modules.system.impermanence") && sys.impermanence.root.enable;
-  # impermanence =
-  #   if impermanenceCheck
-  #   then sys.impermanence
-  #   else {};
 in {
   options.modules.system.services.microvm = {
     enable = lib.mkEnableOption "microvm";
