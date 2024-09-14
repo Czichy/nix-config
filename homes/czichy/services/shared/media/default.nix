@@ -1,9 +1,9 @@
 {
   imports = [
-    ./easyeffects
+    # ./easyeffects
     ./mpd
 
-    ./noisetorch.nix
-    ./spotifyd.nix
+    # ./noisetorch.nix
+    # ./spotifyd.nix
   ];
 }

@@ -12,14 +12,14 @@
 in {
   config = mkIf (prg.gui.enable && sys.video.enable) {
     home.packages = with pkgs; [
-      nextcloud-client
+      # nextcloud-client
       easyeffects
       qbittorrent
       helvum
 
       # Electron applications
       # zoom-us # may we never return to online education
-      netflix
+      # netflix
       bitwarden-desktop
 
       # Obsidian has a pandoc plugin that allows us to render and export
@@ -35,13 +35,16 @@ in {
       })
 
       # plasma packages
-      kdePackages.dolphin
-      kdePackages.dolphin-plugins
-      kdePackages.ark
-      kdePackages.kio
-      kdePackages.kio-extras
-      kdePackages.kimageformats
-      kdePackages.kdegraphics-thumbnailers
+      kdePackages.kate # Advanced text editor
+      kdePackages.kcalc # Scientific calculator
+      kdePackages.kalarm # Personal alarm scheduler
+      # kdePackages.dolphin
+      # kdePackages.dolphin-plugins
+      # kdePackages.ark
+      # kdePackages.kio
+      # kdePackages.kio-extras
+      # kdePackages.kimageformats
+      # kdePackages.kdegraphics-thumbnailers
 
       # Okular needs ghostscript to import PostScript files as PDFs
       # so we add ghostscript_headless as a dependency
@@ -54,9 +57,9 @@ in {
       })
 
       # gnome packages
-      gnome-tweaks
-      gnome-calendar
-      komikku
+      # gnome-tweaks
+      # gnome-calendar
+      # komikku
     ];
   };
 }

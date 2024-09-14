@@ -35,7 +35,7 @@
     # more versions with or without pinned branches can be added if deemed necessary
     # stable? Never heard of her.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small"; # moves faster, has less packages
+    # nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small"; # moves faster, has less packages
 
     # Sometimes nixpkgs breaks something I need, pin a working commit when that occurs
     # nixpkgs-pinned.url = "github:NixOS/nixpkgs/b610c60e23e0583cdc1997c54badfd32592d3d3e";
@@ -83,7 +83,7 @@
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
         flake-compat.follows = "flake-compat";
       };
@@ -94,14 +94,14 @@
       url = "github:feel-co/ndg";
       inputs = {
         flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 
     # A tree-wide formatter
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixfmt = {
@@ -114,7 +114,7 @@
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
       };
     };
@@ -123,7 +123,7 @@
     nixpak = {
       url = "github:nixpak/nixpak";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
       };
     };
@@ -153,19 +153,19 @@
     # nix-index database
     nix-index-db = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     atticd = {
       url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Secrets management
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
         darwin.follows = "";
       };
@@ -175,7 +175,7 @@
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
       };
     };
 
@@ -183,7 +183,7 @@
     nil = {
       url = "github:oxalica/nil";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
     };
@@ -224,7 +224,7 @@
     # store even though they are not used.
     wallpkgs = {
       url = "github:NotAShelf/wallpkgs";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # anyrun program launcher
@@ -246,14 +246,14 @@
     # Includes themes, apps and more.
     spicetify = {
       url = "github:gerg-l/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Schizophrenic Firefox configuration
     schizofox = {
       url = "github:schizofox/schizofox";
       inputs = {
-        nixpkgs.follows = "nixpkgs-small";
+        nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         nixpak.follows = "nixpak";
       };
@@ -262,7 +262,7 @@
     # Mailserver on nixos
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
-      inputs.nixpkgs.follows = "nixpkgs-small";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Hyprland & Hyprland Contrib repos

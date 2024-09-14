@@ -1,6 +1,6 @@
 {
   imports = [
-    ./adb.nix
+    # ./adb.nix
     ./dbus.nix
     ./earlyoom.nix
     # ./gnome.nix

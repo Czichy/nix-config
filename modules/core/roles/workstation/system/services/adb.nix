@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  programs.adb.enable = true;
+  programs.adb.enable = false;
 
   services.udev = {
     packages = [

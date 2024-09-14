@@ -2,10 +2,10 @@
   imports = [
     ./ccache.nix
     ./flatpak.nix
-    ./java.nix
+    # ./java.nix
     ./misc.nix
     ./nh.nix
-    ./wine.nix
+    # ./wine.nix
     ./xdg-ninja.nix
   ];
 }

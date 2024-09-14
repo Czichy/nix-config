@@ -15,8 +15,17 @@ in {
         enable = true;
         drivers = with pkgs; [
           gutenprint
-          hplip
         ];
+        browsing = true;
+        browsedConf = ''
+
+          BrowseDNSSDSubTypes _cups,_print
+          BrowseLocalProtocols all
+          BrowseRemoteProtocols all
+          CreateIPPPrinterQueues All
+
+          BrowseProtocols all
+        '';
       };
 
       # required for network discovery of printers

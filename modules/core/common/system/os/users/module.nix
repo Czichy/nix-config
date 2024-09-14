@@ -23,6 +23,7 @@ in {
   imports = [
     # ../../../hosts/config/users.nix
     ./czichy.nix
+    ./deterministic_ids.nix
     # ./builder.nix
     ./root.nix
   ];

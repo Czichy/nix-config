@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   config.modules.system = {
     fs.enabledFilesystems = ["btrfs" "vfat" "ntfs" "exfat"];
 
@@ -55,7 +59,7 @@
     };
 
     security = {
-      tor.enable = true;
+      # tor.enable = true;
       # fixWebcam = false;
       lockModules = true;
       auditd.enable = true;
@@ -75,7 +79,6 @@
       gui.enable = true;
 
       ib-tws.enable = true;
-      keepassxc.enable = true;
       # spotify.enable = true;
 
       # git.signingKey = "0xAF26552424E53993 ";
@@ -92,7 +95,7 @@
         };
       };
 
-      libreoffice.enable = true;
+      libreoffice.enable = lib.mkForce false;
     };
 
     # Minecraft

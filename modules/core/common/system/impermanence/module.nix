@@ -126,9 +126,9 @@ in {
         "${cfg.persistentRoot}" = {
           #hideMounts = _ true;
           directories = [
-            #"/etc/tensorfiles" # TODO probably not needed anymore ? not sure
             "/var/lib/bluetooth" # TODO move bluetooth to hardware
             "/var/lib/systemd/coredump"
+            # "/var/lib/nixos"
           ];
           files = [
             "/etc/adjtime"
