@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     inputs.disko.nixosModules.disko
     ./disko.nix
@@ -10,6 +14,7 @@
   ];
 
   config = {
+    zramSwap.enable = lib.mkForce false;
     topology.self.icon = "devices.desktop";
     # Mount some filesystems with secure defaults to disallow
     # running executables, setuid binaries, and device files.
@@ -17,12 +22,12 @@
     # while building packages.
     # See:
     #  <https://wiki.archlinux.org/title/Security#Mount_options>
-    fileSystems = let
-      defaults = ["nodev" "nosuid" "noexec"];
-    in {
-      "/var/log".options = defaults;
-      "/boot".options = defaults;
-    };
+    # fileSystems = let
+    #   defaults = ["nodev" "nosuid" "noexec"];
+    # in {
+    #   "/var/log".options = defaults;
+    #   "/boot".options = defaults;
+    # };
 
     system.stateVersion = "24.05";
   };

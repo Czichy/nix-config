@@ -24,7 +24,7 @@
       loadRecommendedModules = true;
       tmpOnTmpfs = false;
       plymouth = {
-        enable = true;
+        enable = false;
         withThemes = false;
       };
     };
